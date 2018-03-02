@@ -17,6 +17,7 @@
 		D640CD452048F1A100CA5DA1 /* Grocery_DudeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D640CD442048F1A100CA5DA1 /* Grocery_DudeUITests.m */; };
 		D640CD542048F26D00CA5DA1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D640CD532048F26D00CA5DA1 /* CoreData.framework */; };
 		D640CD582048F30F00CA5DA1 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D640CD572048F30F00CA5DA1 /* CoreDataHelper.m */; };
+		D640CD5C2049284900CA5DA1 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D640CD5A2049284900CA5DA1 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D640CD532048F26D00CA5DA1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D640CD562048F30F00CA5DA1 /* CoreDataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		D640CD572048F30F00CA5DA1 /* CoreDataHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		D640CD5B2049284900CA5DA1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		D640CD1F2048F1A100CA5DA1 /* Grocery Dude */ = {
 			isa = PBXGroup;
 			children = (
+				D640CD59204927F800CA5DA1 /* Data Model */,
 				D640CD552048F2CF00CA5DA1 /* Generic Core Data Classes */,
 				D640CD202048F1A100CA5DA1 /* AppDelegate.h */,
 				D640CD212048F1A100CA5DA1 /* AppDelegate.m */,
@@ -155,6 +158,14 @@
 				D640CD572048F30F00CA5DA1 /* CoreDataHelper.m */,
 			);
 			path = "Generic Core Data Classes";
+			sourceTree = "<group>";
+		};
+		D640CD59204927F800CA5DA1 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				D640CD5A2049284900CA5DA1 /* Model.xcdatamodeld */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +303,7 @@
 			files = (
 				D640CD252048F1A100CA5DA1 /* ViewController.m in Sources */,
 				D640CD302048F1A100CA5DA1 /* main.m in Sources */,
+				D640CD5C2049284900CA5DA1 /* Model.xcdatamodeld in Sources */,
 				D640CD582048F30F00CA5DA1 /* CoreDataHelper.m in Sources */,
 				D640CD222048F1A100CA5DA1 /* AppDelegate.m in Sources */,
 			);
@@ -580,6 +592,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D640CD5A2049284900CA5DA1 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D640CD5B2049284900CA5DA1 /* Model.xcdatamodel */,
+			);
+			currentVersion = D640CD5B2049284900CA5DA1 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D640CD152048F1A100CA5DA1 /* Project object */;
 }
