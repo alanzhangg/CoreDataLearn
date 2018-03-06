@@ -116,7 +116,7 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
         if ([_context save:&error]) {
             NSLog(@"save");
         }else{
-            NSLog(@"Failed");
+            NSLog(@"Failed %@", error);
         }
     }else
         NSLog(@"Skipped");
