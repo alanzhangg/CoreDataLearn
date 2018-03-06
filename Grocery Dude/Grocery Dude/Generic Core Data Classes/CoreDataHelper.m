@@ -75,19 +75,25 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
     if (_store) {
         return;
     }
-    NSError * error = nil;
-    NSDictionary * options = @{
-                               NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"},
-                               NSMigratePersistentStoresAutomaticallyOption:@YES,
-                               NSInferMappingModelAutomaticallyOption:@NO
-                               };
-    _store = [_coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:options error:&error];
-    if (!_store) {
-        NSLog(@"Fail");
-        abort();
+    
+    BOOL useMigrationManager = YES;
+    if (useMigrationManager && [self isMigrationNecessaryForStore:[self storeURL]]) {
+        [self performBackgroundManagedMigrationForStore:[self storeURL]];
     }else{
-        if (debug == 1) {
-            NSLog(@"Successfully %@", _store);
+        NSError * error = nil;
+        NSDictionary * options = @{
+                                   NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"},
+                                   NSMigratePersistentStoresAutomaticallyOption:@YES,
+                                   NSInferMappingModelAutomaticallyOption:@NO
+                                   };
+        _store = [_coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:options error:&error];
+        if (!_store) {
+            NSLog(@"Fail");
+            abort();
+        }else{
+            if (debug == 1) {
+                NSLog(@"Successfully %@", _store);
+            }
         }
     }
 }
@@ -116,6 +122,135 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
         NSLog(@"Skipped");
 }
 
+#pragma mark - MIGRATION MANAGER
 
+- (BOOL)isMigrationNecessaryForStore:(NSURL *)storeUrl{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[self storeURL].path]) {
+        if (debug == 1) {
+            NSLog(@"Skipped migration");
+        }
+        return NO;
+    }
+    NSError * error = nil;
+    NSDictionary * sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeUrl error:&error];
+    NSManagedObjectModel * destinationModel = _coordinator.managedObjectModel;
+    if ([destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata]) {
+        if (debug == 1) {
+            NSLog(@"SKIPPED MIGRATION");
+        }
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)migrationStore:(NSURL *)sourceStore{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    BOOL success = NO;
+    NSError * error = nil;
+    
+    NSDictionary * sourceMetaData = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:sourceStore error:&error];
+    
+    NSManagedObjectModel * sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetaData];
+    
+    NSManagedObjectModel * destinModel = _model;
+    NSMappingModel * mappingModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinModel];
+    if (mappingModel) {
+        NSError * error = nil;
+        NSMigrationManager * migrationManager = [[NSMigrationManager alloc] initWithSourceModel:sourceModel destinationModel:destinModel];
+        [migrationManager addObserver:self forKeyPath:@"migrationProgress" options:NSKeyValueObservingOptionNew context:NULL];
+        
+        NSURL * destinStore = [[self applicationStoreDirection] URLByAppendingPathComponent:@"Temp.sqlite"];
+        
+        success = [migrationManager migrateStoreFromURL:sourceStore type:NSSQLiteStoreType options:nil withMappingModel:mappingModel toDestinationURL:destinStore destinationType:NSSQLiteStoreType destinationOptions:nil error:&error];
+        if (success) {
+            if ([self replaceStore:sourceStore withStore:destinStore]) {
+                if (debug == 1) {
+                    NSLog(@"successfully");
+                }
+                [migrationManager removeObserver:self forKeyPath:@"migrationProgress"];
+            }else{
+                if (debug == 1) {
+                    NSLog(@"Filed");
+                }
+            }
+        }else{
+            if (debug == 1) {
+                NSLog(@"Failed");
+            }
+        }
+    }else{
+        if (debug == 1) {
+            NSLog(@"failed");
+        }
+    }
+    return YES;
+    
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"migrationProgress"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            float progress = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+            self.migrationVC.progressView.progress = progress;
+            int percentage = progress * 100;
+            NSString * str = [NSString stringWithFormat:@"Migration Process %i%%", percentage];
+            NSLog(@"%@", str);
+            self.migrationVC.label.text = str;
+        });
+    }
+}
+
+- (BOOL)replaceStore:(NSURL *)old withStore:(NSURL *)new{
+    BOOL success = NO;
+    NSError * error = nil;
+    if ([[NSFileManager defaultManager] removeItemAtURL:old error:&error]) {
+        error = nil;
+        if ([[NSFileManager defaultManager] moveItemAtURL:new toURL:old error:&error]) {
+            success = YES;
+        }else{
+            if (debug == 1) {
+                NSLog(@"Failed");
+            }
+        }
+    }else{
+        if (debug == 1) {
+            NSLog(@"Failed");
+        }
+    }
+    return success;
+}
+
+- (void)performBackgroundManagedMigrationForStore:(NSURL *)storeUrl{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.migrationVC = [sb instantiateViewControllerWithIdentifier:@"MigrationC"];
+    UIApplication * sa = [UIApplication sharedApplication];
+    UINavigationController * nc = (UINavigationController *)sa.keyWindow.rootViewController;
+    [nc presentViewController:self.migrationVC animated:NO completion:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        BOOL done = [self migrationStore:storeUrl];
+        if (done) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSError * error = nil;
+                _store = [_coordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self storeURL] options:nil error:&error];
+                if (!_store) {
+                    NSLog(@"Failed %@", error);
+                    abort();
+                }else{
+                    NSLog(@"Successfully %@", _store);
+                }
+                [self.migrationVC dismissViewControllerAnimated:NO completion:nil];
+                self.migrationVC = nil;
+            });
+        }
+    });
+}
 
 @end

@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Item+CoreDataClass.h"
-#import "Measurement+CoreDataClass.h"
+#import "Unit+CoreDataClass.h"
 
 #define debug 1
 
@@ -62,7 +62,7 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     
-    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Measurement"];
+    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
     [request setFetchLimit:50];
     NSError * error = nil;
     NSAsynchronousFetchResult * result = [_coreDataHelper.context executeRequest:request
@@ -70,8 +70,8 @@
     if (error) {
         NSLog(@"%@", error);
     }else{
-        for (Measurement * measurement in result.finalResult) {
-            NSLog(@"Fetched object = %@", measurement.abs);
+        for (Unit * unit in result.finalResult) {
+            NSLog(@"Fetched object = %@", unit.name);
         }
     }
     

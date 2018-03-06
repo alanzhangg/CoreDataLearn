@@ -17,6 +17,11 @@
 		D694DABB204D0AA100575ABC /* Grocery_DudeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DABA204D0AA100575ABC /* Grocery_DudeUITests.m */; };
 		D694DACB204D0B1000575ABC /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DAC9204D0B1000575ABC /* CoreDataHelper.m */; };
 		D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */; };
+		D6AB8566204E681500C91231 /* Model2toModel3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8565204E681500C91231 /* Model2toModel3.xcmappingmodel */; };
+		D6AB856A204E705600C91231 /* MigrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8569204E705600C91231 /* MigrationVC.m */; };
+		D6AB856D204E7FB000C91231 /* Model3toModel4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB856C204E7FB000C91231 /* Model3toModel4.xcmappingmodel */; };
+		D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */; };
+		D6AB8574204E855700C91231 /* Model5toModel4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +62,15 @@
 		D694DACA204D0B1000575ABC /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		D694DACE204D0B3D00575ABC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D694DAD0204D334400575ABC /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		D6AB8564204E673A00C91231 /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
+		D6AB8565204E681500C91231 /* Model2toModel3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model2toModel3.xcmappingmodel; sourceTree = "<group>"; };
+		D6AB8568204E705600C91231 /* MigrationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MigrationVC.h; sourceTree = "<group>"; };
+		D6AB8569204E705600C91231 /* MigrationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MigrationVC.m; sourceTree = "<group>"; };
+		D6AB856B204E7F5100C91231 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
+		D6AB856C204E7FB000C91231 /* Model3toModel4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model3toModel4.xcmappingmodel; sourceTree = "<group>"; };
+		D6AB856E204E815700C91231 /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
+		D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model4toModel5.xcmappingmodel; sourceTree = "<group>"; };
+		D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model5toModel4.xcmappingmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +121,7 @@
 		D694DA95204D0AA100575ABC /* Grocery Dude */ = {
 			isa = PBXGroup;
 			children = (
+				D6AB8567204E700900C91231 /* Grocery Dude View Controller */,
 				D694DACC204D0B2B00575ABC /* Data Model */,
 				D694DAC8204D0AFA00575ABC /* Generic Core Data Classes */,
 				D694DA96204D0AA100575ABC /* AppDelegate.h */,
@@ -153,8 +168,21 @@
 			isa = PBXGroup;
 			children = (
 				D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */,
+				D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */,
+				D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */,
+				D6AB8565204E681500C91231 /* Model2toModel3.xcmappingmodel */,
+				D6AB856C204E7FB000C91231 /* Model3toModel4.xcmappingmodel */,
 			);
 			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		D6AB8567204E700900C91231 /* Grocery Dude View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D6AB8568204E705600C91231 /* MigrationVC.h */,
+				D6AB8569204E705600C91231 /* MigrationVC.m */,
+			);
+			path = "Grocery Dude View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,9 +320,14 @@
 			files = (
 				D694DA9B204D0AA100575ABC /* ViewController.m in Sources */,
 				D694DAA6204D0AA100575ABC /* main.m in Sources */,
+				D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */,
+				D6AB856A204E705600C91231 /* MigrationVC.m in Sources */,
 				D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */,
+				D6AB8574204E855700C91231 /* Model5toModel4.xcmappingmodel in Sources */,
 				D694DACB204D0B1000575ABC /* CoreDataHelper.m in Sources */,
 				D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */,
+				D6AB8566204E681500C91231 /* Model2toModel3.xcmappingmodel in Sources */,
+				D6AB856D204E7FB000C91231 /* Model3toModel4.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,10 +619,13 @@
 		D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D6AB856E204E815700C91231 /* Model 5.xcdatamodel */,
+				D6AB856B204E7F5100C91231 /* Model 4.xcdatamodel */,
+				D6AB8564204E673A00C91231 /* Model 3.xcdatamodel */,
 				D694DAD0204D334400575ABC /* Model 2.xcdatamodel */,
 				D694DACE204D0B3D00575ABC /* Model.xcdatamodel */,
 			);
-			currentVersion = D694DAD0204D334400575ABC /* Model 2.xcdatamodel */;
+			currentVersion = D6AB856E204E815700C91231 /* Model 5.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
