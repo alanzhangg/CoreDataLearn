@@ -7,8 +7,12 @@
         <attribute name="photoData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Float" defaultValueString="1" usesScalarValueType="NO" syncable="YES"/>
     </entity>
+    <entity name="Measurement" representedClassName="Measurement" syncable="YES" codeGenerationType="class">
+        <attribute name="abs" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <fetchRequest name="Test" entity="Item" predicateString="name CONTAINS &quot;e&quot;"/>
     <elements>
         <element name="Item" positionX="-9" positionY="36" width="128" height="120"/>
+        <element name="Measurement" positionX="0" positionY="81" width="128" height="60"/>
     </elements>
 </model>

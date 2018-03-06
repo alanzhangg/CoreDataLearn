@@ -56,6 +56,7 @@
 		D694DAC9204D0B1000575ABC /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		D694DACA204D0B1000575ABC /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		D694DACE204D0B3D00575ABC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		D694DAD0204D334400575ABC /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -585,9 +586,10 @@
 		D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D694DAD0204D334400575ABC /* Model 2.xcdatamodel */,
 				D694DACE204D0B3D00575ABC /* Model.xcdatamodel */,
 			);
-			currentVersion = D694DACE204D0B3D00575ABC /* Model.xcdatamodel */;
+			currentVersion = D694DAD0204D334400575ABC /* Model 2.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

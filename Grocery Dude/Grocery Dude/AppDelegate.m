@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Item+CoreDataClass.h"
+#import "Measurement+CoreDataClass.h"
 
 #define debug 1
 
@@ -60,12 +61,47 @@
     if (debug == 1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
-    NSArray * newItemNames = @[@"Apples", @"Bread", @"Cheese", @"Sausages", @"Butter", @"Orange Juices", @"Cereal", @"",];
-    for (NSString * newItemName in newItemNames) {
-        Item * newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:_coreDataHelper.context];
-        newItem.name = newItemName;
-        NSLog(@"Inserted New Managed Object for '%@'", newItem.name);
+    
+    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Measurement"];
+    [request setFetchLimit:50];
+    NSError * error = nil;
+    NSAsynchronousFetchResult * result = [_coreDataHelper.context executeRequest:request
+                                      error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+    }else{
+        for (Measurement * measurement in result.finalResult) {
+            NSLog(@"Fetched object = %@", measurement.abs);
+        }
     }
+    
+//    for (int i = 0; i < 50000; i++) {
+//        Measurement * newMeasurement = [NSEntityDescription insertNewObjectForEntityForName:@"Measurement" inManagedObjectContext:[_coreDataHelper context]];
+//        newMeasurement.abs = [NSString stringWithFormat:@"--->> LOTS OF TEST DATA x%i", i];
+//        NSLog(@"Inserted %@", newMeasurement.abs);
+//    }
+//    [_coreDataHelper saveContext];
+    
+//    NSArray * newItemNames = @[@"Apples", @"Bread", @"Cheese", @"Sausages", @"Butter", @"Orange Juices", @"Cereal", @"",];
+//    for (NSString * newItemName in newItemNames) {
+//        Item * newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:_coreDataHelper.context];
+//        newItem.name = newItemName;
+//        NSLog(@"Inserted New Managed Object for '%@'", newItem.name);
+//    }
+    
+//    NSFetchRequest * request = [[_coreDataHelper model] fetchRequestTemplateForName:@"Test"];
+    
+//    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+//    NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+//    [request setSortDescriptors:@[sort]];
+//
+//    NSPredicate * filter = [NSPredicate predicateWithFormat:@"name != %@", @"Coffee"];
+//    [request setPredicate:filter];
+//
+//    NSAsynchronousFetchResult * fetchObject = [_coreDataHelper.context executeRequest:request error:nil];
+//    for (Item * item in fetchObject.finalResult) {
+//        NSLog(@"Fetched Object = %@", item.name);
+//    }
 }
 
 - (CoreDataHelper *)chd{
