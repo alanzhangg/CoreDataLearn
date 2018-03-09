@@ -117,9 +117,12 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
             NSLog(@"save");
         }else{
             NSLog(@"Failed %@", error);
+            [self showValidationError:error];
         }
     }else
         NSLog(@"Skipped");
+    
+    
 }
 
 #pragma mark - MIGRATION MANAGER
@@ -251,6 +254,40 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
             });
         }
     });
+}
+
+#pragma mark - VALIDATION ERROR HANDING
+
+- (void)showValidationError:(NSError *)anError{
+    if (anError && [anError.domain isEqualToString:@"NSCocoaErrorDomain"]) {
+        NSArray * errors = nil;
+        NSString * txt = @"";
+        if (anError.code == NSValidationMultipleErrorsError) {
+            errors = [anError.userInfo objectForKey:NSDetailedErrorsKey];
+        }else{
+            errors = [NSArray arrayWithObject:anError];
+        }
+        
+        if (errors && errors.count > 0) {
+            for (NSError * error in errors) {
+                
+                NSString * entity = [[[error.userInfo objectForKey:@"NSValidationErrorObject"] entity] name];
+                NSString * property = [error.userInfo objectForKey:@"NSValidationErrorKey"];
+                switch (error.code) {
+                    case NSValidationRelationshipDeniedDeleteError:
+                        txt = [txt stringByAppendingFormat:@"%@ delete was denied because there are associated %@\n(Error Code %li)\n\n", entity, property, (long)error.code];
+                        break;
+                        
+                    default:
+                        txt = [txt stringByAppendingFormat:@"Unhandled error code %li in showValidationError method", (long)error.code];
+                        break;
+                }
+            }
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Validation Error" message:txt delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alertView show];
+        }
+        
+    }
 }
 
 @end

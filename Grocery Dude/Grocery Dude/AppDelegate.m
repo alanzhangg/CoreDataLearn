@@ -62,19 +62,18 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     
-    [self showUnitAndItemCount];
-    
-    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
-    NSPredicate * filter = [NSPredicate predicateWithFormat:@"name == %@", @"Kg"];
-    [request setPredicate:filter];
-    NSAsynchronousFetchResult * fetchResut = [[[self chd] context] executeRequest:request error:nil];
-    for (Unit * unit in fetchResut.finalResult) {
-        [_coreDataHelper.context deleteObject:unit];
-        NSLog(@"A Kg unit object was deleted");
-    }
-    NSLog(@"After deletion of the unit entity:");
-    [self showUnitAndItemCount];
-    [[self chd] saveContext];
+//    [self showUnitAndItemCount];
+//    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
+//    NSPredicate * filter = [NSPredicate predicateWithFormat:@"name == %@", @"Kg"];
+//    [request setPredicate:filter];
+//    NSAsynchronousFetchResult * fetchResut = [[[self chd] context] executeRequest:request error:nil];
+//    for (Unit * unit in fetchResut.finalResult) {
+//        [_coreDataHelper.context deleteObject:unit];
+//        NSLog(@"A Kg unit object was deleted");
+//    }
+//    NSLog(@"After deletion of the unit entity:");
+//    [self showUnitAndItemCount];
+//    [[self chd] saveContext];
     
 //    Unit * kg = [NSEntityDescription insertNewObjectForEntityForName:@"Unit" inManagedObjectContext:[[self chd] context]];
 //    Item * oranges = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:[[self chd] context]];
@@ -161,7 +160,10 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     if (!_coreDataHelper) {
-        _coreDataHelper = [CoreDataHelper new];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _coreDataHelper = [CoreDataHelper new];
+        });
         [_coreDataHelper setupCoreData];
     }
     return _coreDataHelper;
