@@ -7,6 +7,10 @@
 //
 
 #import "PrepareTVC.h"
+#import "CoreDataHelper.h"
+#import "Item+CoreDataClass.h"
+#import "Unit+CoreDataClass.h"
+#import "AppDelegate.h"
 
 @interface PrepareTVC ()
 
@@ -14,14 +18,18 @@
 
 @implementation PrepareTVC
 
+#define debug 1
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    [self configureFetch];
+    [self performFetch];
+    self.clearConfirmActionSheet.delegate = self;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preformFetch) name:@"SomethingChanged" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,68 +39,56 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    static NSString * cellIdentifier = @"Item Cell";
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDetailButton;
+    Item * item = [self.frc objectAtIndexPath:indexPath];
+    NSMutableString * title = [NSMutableString stringWithFormat:@"%@%@ %@", item.quantity, item.unit.name, item.name];
+//    NSLog(@"%@", item.locationAtHome.storedIn);
+    [title replaceOccurrencesOfString:@"(null)" withString:@"" options:0 range:NSMakeRange(0, title.length)];
+    cell.textLabel.text = title;
+    if ([item.listed boolValue]) {
+        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:18]];
+        [cell.textLabel setTextColor:[UIColor orangeColor]];
+    }else{
+        [cell.textLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:16]];
+        [cell.textLabel setTextColor:[UIColor grayColor]];
+    }
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    return nil;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+#pragma mark - DATA
+
+- (void)configureFetch{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper * cdh = [(AppDelegate *)[UIApplication sharedApplication].delegate chd];
+    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+    
+    request.sortDescriptors = [NSArray arrayWithObjects:
+                               [NSSortDescriptor sortDescriptorWithKey:@"locationAtHome.storedIn" ascending:YES],
+                               [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES], nil];
+    
+    [request setFetchBatchSize:50];
+    self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:cdh.context sectionNameKeyPath:@"locationAtHome.storedIn" cacheName:nil];
+    self.frc.delegate = self;
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

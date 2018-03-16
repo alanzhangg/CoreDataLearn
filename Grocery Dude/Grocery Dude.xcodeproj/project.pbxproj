@@ -18,6 +18,16 @@
 		D694DACB204D0B1000575ABC /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DAC9204D0B1000575ABC /* CoreDataHelper.m */; };
 		D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */; };
 		D6A3367820527C400038EF00 /* PrepareTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3367720527C400038EF00 /* PrepareTVC.m */; };
+		D6A47099205BA5D800F84180 /* Unit+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47087205BA5D800F84180 /* Unit+CoreDataClass.m */; };
+		D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47088205BA5D800F84180 /* Unit+CoreDataProperties.m */; };
+		D6A4709D205BA5D800F84180 /* LocationAtHome+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A4708F205BA5D800F84180 /* LocationAtHome+CoreDataClass.m */; };
+		D6A4709E205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47090205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m */; };
+		D6A4709F205BA5D800F84180 /* Location+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47093205BA5D800F84180 /* Location+CoreDataClass.m */; };
+		D6A470A0205BA5D800F84180 /* Location+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47094205BA5D800F84180 /* Location+CoreDataProperties.m */; };
+		D6A470A1205BA5D800F84180 /* LocationAtShop+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47097205BA5D800F84180 /* LocationAtShop+CoreDataClass.m */; };
+		D6A470A2205BA5D800F84180 /* LocationAtShop+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47098205BA5D800F84180 /* LocationAtShop+CoreDataProperties.m */; };
+		D6A470A7205BA86200F84180 /* Item+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A470A5205BA86200F84180 /* Item+CoreDataClass.m */; };
+		D6A470A8205BA86200F84180 /* Item+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A470A6205BA86200F84180 /* Item+CoreDataProperties.m */; };
 		D6A5193B204F8E7A00016821 /* CoreDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A5193A204F8E7A00016821 /* CoreDataTVC.m */; };
 		D6AB8566204E681500C91231 /* Model2toModel3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8565204E681500C91231 /* Model2toModel3.xcmappingmodel */; };
 		D6AB856A204E705600C91231 /* MigrationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8569204E705600C91231 /* MigrationVC.m */; };
@@ -66,6 +76,26 @@
 		D694DAD0204D334400575ABC /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		D6A3367620527C400038EF00 /* PrepareTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrepareTVC.h; sourceTree = "<group>"; };
 		D6A3367720527C400038EF00 /* PrepareTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrepareTVC.m; sourceTree = "<group>"; };
+		D6A47085205BA5D800F84180 /* Unit+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit+CoreDataProperties.h"; path = "Grocery Dude/Data Model/Unit+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D6A47086205BA5D800F84180 /* Unit+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit+CoreDataClass.h"; path = "Grocery Dude/Data Model/Unit+CoreDataClass.h"; sourceTree = "<group>"; };
+		D6A47087205BA5D800F84180 /* Unit+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Unit+CoreDataClass.m"; path = "Grocery Dude/Data Model/Unit+CoreDataClass.m"; sourceTree = "<group>"; };
+		D6A47088205BA5D800F84180 /* Unit+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Unit+CoreDataProperties.m"; path = "Grocery Dude/Data Model/Unit+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D6A4708D205BA5D800F84180 /* LocationAtHome+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LocationAtHome+CoreDataProperties.h"; path = "Grocery Dude/Data Model/LocationAtHome+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D6A4708E205BA5D800F84180 /* LocationAtHome+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LocationAtHome+CoreDataClass.h"; path = "Grocery Dude/Data Model/LocationAtHome+CoreDataClass.h"; sourceTree = "<group>"; };
+		D6A4708F205BA5D800F84180 /* LocationAtHome+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "LocationAtHome+CoreDataClass.m"; path = "Grocery Dude/Data Model/LocationAtHome+CoreDataClass.m"; sourceTree = "<group>"; };
+		D6A47090205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "LocationAtHome+CoreDataProperties.m"; path = "Grocery Dude/Data Model/LocationAtHome+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D6A47091205BA5D800F84180 /* Location+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Location+CoreDataProperties.h"; path = "Grocery Dude/Data Model/Location+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D6A47092205BA5D800F84180 /* Location+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Location+CoreDataClass.h"; path = "Grocery Dude/Data Model/Location+CoreDataClass.h"; sourceTree = "<group>"; };
+		D6A47093205BA5D800F84180 /* Location+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Location+CoreDataClass.m"; path = "Grocery Dude/Data Model/Location+CoreDataClass.m"; sourceTree = "<group>"; };
+		D6A47094205BA5D800F84180 /* Location+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Location+CoreDataProperties.m"; path = "Grocery Dude/Data Model/Location+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D6A47095205BA5D800F84180 /* LocationAtShop+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LocationAtShop+CoreDataProperties.h"; path = "Grocery Dude/Data Model/LocationAtShop+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D6A47096205BA5D800F84180 /* LocationAtShop+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "LocationAtShop+CoreDataClass.h"; path = "Grocery Dude/Data Model/LocationAtShop+CoreDataClass.h"; sourceTree = "<group>"; };
+		D6A47097205BA5D800F84180 /* LocationAtShop+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "LocationAtShop+CoreDataClass.m"; path = "Grocery Dude/Data Model/LocationAtShop+CoreDataClass.m"; sourceTree = "<group>"; };
+		D6A47098205BA5D800F84180 /* LocationAtShop+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "LocationAtShop+CoreDataProperties.m"; path = "Grocery Dude/Data Model/LocationAtShop+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D6A470A3205BA86200F84180 /* Item+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Item+CoreDataProperties.h"; path = "Grocery Dude/Data Model/Item+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D6A470A4205BA86200F84180 /* Item+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Item+CoreDataClass.h"; path = "Grocery Dude/Data Model/Item+CoreDataClass.h"; sourceTree = "<group>"; };
+		D6A470A5205BA86200F84180 /* Item+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Item+CoreDataClass.m"; path = "Grocery Dude/Data Model/Item+CoreDataClass.m"; sourceTree = "<group>"; };
+		D6A470A6205BA86200F84180 /* Item+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Item+CoreDataProperties.m"; path = "Grocery Dude/Data Model/Item+CoreDataProperties.m"; sourceTree = "<group>"; };
 		D6A51938204F86E100016821 /* Model 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 6.xcdatamodel"; sourceTree = "<group>"; };
 		D6A51939204F8E7A00016821 /* CoreDataTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataTVC.h; sourceTree = "<group>"; };
 		D6A5193A204F8E7A00016821 /* CoreDataTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataTVC.m; sourceTree = "<group>"; };
@@ -108,6 +138,26 @@
 		D694DA8A204D0AA100575ABC = {
 			isa = PBXGroup;
 			children = (
+				D6A470A3205BA86200F84180 /* Item+CoreDataProperties.h */,
+				D6A470A4205BA86200F84180 /* Item+CoreDataClass.h */,
+				D6A470A5205BA86200F84180 /* Item+CoreDataClass.m */,
+				D6A470A6205BA86200F84180 /* Item+CoreDataProperties.m */,
+				D6A47085205BA5D800F84180 /* Unit+CoreDataProperties.h */,
+				D6A47086205BA5D800F84180 /* Unit+CoreDataClass.h */,
+				D6A47087205BA5D800F84180 /* Unit+CoreDataClass.m */,
+				D6A47088205BA5D800F84180 /* Unit+CoreDataProperties.m */,
+				D6A4708D205BA5D800F84180 /* LocationAtHome+CoreDataProperties.h */,
+				D6A4708E205BA5D800F84180 /* LocationAtHome+CoreDataClass.h */,
+				D6A4708F205BA5D800F84180 /* LocationAtHome+CoreDataClass.m */,
+				D6A47090205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m */,
+				D6A47091205BA5D800F84180 /* Location+CoreDataProperties.h */,
+				D6A47092205BA5D800F84180 /* Location+CoreDataClass.h */,
+				D6A47093205BA5D800F84180 /* Location+CoreDataClass.m */,
+				D6A47094205BA5D800F84180 /* Location+CoreDataProperties.m */,
+				D6A47095205BA5D800F84180 /* LocationAtShop+CoreDataProperties.h */,
+				D6A47096205BA5D800F84180 /* LocationAtShop+CoreDataClass.h */,
+				D6A47097205BA5D800F84180 /* LocationAtShop+CoreDataClass.m */,
+				D6A47098205BA5D800F84180 /* LocationAtShop+CoreDataProperties.m */,
 				D694DA95204D0AA100575ABC /* Grocery Dude */,
 				D694DAAE204D0AA100575ABC /* Grocery DudeTests */,
 				D694DAB9204D0AA100575ABC /* Grocery DudeUITests */,
@@ -337,16 +387,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A4709F205BA5D800F84180 /* Location+CoreDataClass.m in Sources */,
 				D6A5193B204F8E7A00016821 /* CoreDataTVC.m in Sources */,
+				D6A470A8205BA86200F84180 /* Item+CoreDataProperties.m in Sources */,
+				D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */,
+				D6A4709E205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m in Sources */,
+				D6A4709D205BA5D800F84180 /* LocationAtHome+CoreDataClass.m in Sources */,
 				D694DA9B204D0AA100575ABC /* ViewController.m in Sources */,
 				D694DAA6204D0AA100575ABC /* main.m in Sources */,
+				D6A470A2205BA5D800F84180 /* LocationAtShop+CoreDataProperties.m in Sources */,
 				D6A3367820527C400038EF00 /* PrepareTVC.m in Sources */,
+				D6A470A1205BA5D800F84180 /* LocationAtShop+CoreDataClass.m in Sources */,
 				D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */,
 				D6AB856A204E705600C91231 /* MigrationVC.m in Sources */,
 				D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */,
+				D6A470A7205BA86200F84180 /* Item+CoreDataClass.m in Sources */,
 				D6AB8574204E855700C91231 /* Model5toModel4.xcmappingmodel in Sources */,
+				D6A470A0205BA5D800F84180 /* Location+CoreDataProperties.m in Sources */,
 				D694DACB204D0B1000575ABC /* CoreDataHelper.m in Sources */,
 				D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */,
+				D6A47099205BA5D800F84180 /* Unit+CoreDataClass.m in Sources */,
 				D6AB8566204E681500C91231 /* Model2toModel3.xcmappingmodel in Sources */,
 				D6AB856D204E7FB000C91231 /* Model3toModel4.xcmappingmodel in Sources */,
 			);

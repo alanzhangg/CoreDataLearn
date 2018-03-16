@@ -8,6 +8,8 @@
 
 #import "CoreDataTVC.h"
 
-@interface PrepareTVC : CoreDataTVC
+@interface PrepareTVC : CoreDataTVC<UIActionSheetDelegate>
+
+@property (strong, nonatomic) UIActionSheet * clearConfirmActionSheet;
 
 @end

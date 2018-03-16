@@ -86,10 +86,10 @@
             </objects>
             <point key="canvasLocation" x="289" y="-196"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Items-->
         <scene sceneID="rvm-Zn-u35">
             <objects>
-                <tableViewController id="b79-0d-ak0" sceneMemberID="viewController">
+                <tableViewController id="b79-0d-ak0" customClass="PrepareTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ucQ-Mq-VP4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,7 +109,7 @@
                             <outlet property="delegate" destination="b79-0d-ak0" id="PjE-Ya-C8N"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="uuv-Ua-JxJ"/>
+                    <navigationItem key="navigationItem" title="Items" id="uuv-Ua-JxJ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3d8-Tu-pDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
