@@ -11,6 +11,7 @@
 #import "Item+CoreDataClass.h"
 #import "Unit+CoreDataClass.h"
 #import "AppDelegate.h"
+#import "ItemVC.h"
 
 @interface PrepareTVC ()
 
@@ -64,11 +65,92 @@
     return cell;
 }
 
-- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+//- (NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView{
+//    if (debug == 1) {
+//        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+//    }
+//    return nil;
+//}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     if (debug == 1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
-    return nil;
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Item * deleteTarget = [self.frc objectAtIndexPath:indexPath];
+        [self.frc.managedObjectContext deleteObject:deleteTarget];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    NSManagedObjectID * itemid = [[self.frc objectAtIndexPath:indexPath] objectID];
+    Item * item = (Item *)[self.frc.managedObjectContext existingObjectWithID:itemid error:nil];
+    if ([item.listed boolValue]) {
+        item.listed = @NO;
+    }else{
+        item.listed = @YES;
+        item.collected = @NO;
+    }
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    ItemVC * itemVC = [self.storyboard instantiateViewControllerWithIdentifier:@"ItemVC"];
+    itemVC.selectedItemID = [[self.frc objectAtIndexPath:indexPath] objectID];
+    [self.navigationController pushViewController:itemVC animated:YES];
+}
+
+#pragma mark - INTERACTION
+
+- (IBAction)clear:(id)sender{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper* cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    NSFetchRequest * request = [cdh.model fetchRequestTemplateForName:@"ShoppingList"];
+    NSAsynchronousFetchResult * result = [cdh.context executeRequest:request error:nil];
+    NSArray * shoppingList = result.finalResult;
+    if (shoppingList.count > 0) {
+        self.clearConfirmActionSheet = [[UIActionSheet alloc] initWithTitle:@"Clear Entire Shopping List?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Clear" otherButtonTitles:nil];
+        [self.clearConfirmActionSheet showFromTabBar:self.navigationController.tabBarController.tabBar];
+    }else{
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Nothing to Clear" message:@"Add items ro the shop Tab" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    shoppingList = nil;
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (actionSheet == self.clearConfirmActionSheet) {
+        if (buttonIndex == [actionSheet destructiveButtonIndex]) {
+            [self performSelector:@selector(clearList)];
+        }else if (buttonIndex == [actionSheet cancelButtonIndex]){
+            [actionSheet dismissWithClickedButtonIndex:[actionSheet cancelButtonIndex] animated:YES];
+        }
+    }
+}
+
+- (void)clearList{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    NSFetchRequest * request = [cdh.model fetchRequestTemplateForName:@"ShoppingList"];
+    NSAsynchronousFetchResult * result = [cdh.context executeRequest:request error:nil];
+    NSArray * shoppingList = result.finalResult;
+    for (Item * item  in shoppingList) {
+        item.listed = @NO;
+    }
 }
 
 #pragma mark - DATA
@@ -89,6 +171,24 @@
     self.frc.delegate = self;
 }
 
+#pragma mark - SEGUE
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    ItemVC * itemVC = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"Add Item Segue"]) {
+        CoreDataHelper * cdh = [(AppDelegate *)[UIApplication sharedApplication].delegate chd];
+        Item * newItem = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:cdh.context];
+        NSError * error = nil;
+        if (![cdh.context obtainPermanentIDsForObjects:@[newItem] error:&error]) {
+            NSLog(@"Couldn't obtain a permanent ID for Object %@", error);
+        }
+        itemVC.selectedItemID = newItem.objectID;
+    }else{
+        NSLog(@"Unidentified Segue Attempted!");
+    }
+}
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B98D206239EA0079D9A3 /* ShopTVC.m */; };
+		D655B99120624F860079D9A3 /* ItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B99020624F860079D9A3 /* ItemVC.m */; };
 		D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DA97204D0AA100575ABC /* AppDelegate.m */; };
 		D694DA9B204D0AA100575ABC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DA9A204D0AA100575ABC /* ViewController.m */; };
 		D694DA9E204D0AA100575ABC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D694DA9C204D0AA100575ABC /* Main.storyboard */; };
@@ -54,6 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D655B98C206239EA0079D9A3 /* ShopTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShopTVC.h; sourceTree = "<group>"; };
+		D655B98D206239EA0079D9A3 /* ShopTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopTVC.m; sourceTree = "<group>"; };
+		D655B98F20624F860079D9A3 /* ItemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemVC.h; sourceTree = "<group>"; };
+		D655B99020624F860079D9A3 /* ItemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemVC.m; sourceTree = "<group>"; };
 		D694DA93204D0AA100575ABC /* Grocery Dude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Dude.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D694DA96204D0AA100575ABC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D694DA97204D0AA100575ABC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -241,6 +247,8 @@
 			children = (
 				D6A3367620527C400038EF00 /* PrepareTVC.h */,
 				D6A3367720527C400038EF00 /* PrepareTVC.m */,
+				D655B98C206239EA0079D9A3 /* ShopTVC.h */,
+				D655B98D206239EA0079D9A3 /* ShopTVC.m */,
 			);
 			path = "Grocery Dude Table View Controllers";
 			sourceTree = "<group>";
@@ -250,6 +258,8 @@
 			children = (
 				D6AB8568204E705600C91231 /* MigrationVC.h */,
 				D6AB8569204E705600C91231 /* MigrationVC.m */,
+				D655B98F20624F860079D9A3 /* ItemVC.h */,
+				D655B99020624F860079D9A3 /* ItemVC.m */,
 			);
 			path = "Grocery Dude View Controller";
 			sourceTree = "<group>";
@@ -390,6 +400,7 @@
 				D6A4709F205BA5D800F84180 /* Location+CoreDataClass.m in Sources */,
 				D6A5193B204F8E7A00016821 /* CoreDataTVC.m in Sources */,
 				D6A470A8205BA86200F84180 /* Item+CoreDataProperties.m in Sources */,
+				D655B99120624F860079D9A3 /* ItemVC.m in Sources */,
 				D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */,
 				D6A4709E205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m in Sources */,
 				D6A4709D205BA5D800F84180 /* LocationAtHome+CoreDataClass.m in Sources */,
@@ -401,6 +412,7 @@
 				D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */,
 				D6AB856A204E705600C91231 /* MigrationVC.m in Sources */,
 				D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */,
+				D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */,
 				D6A470A7205BA86200F84180 /* Item+CoreDataClass.m in Sources */,
 				D6AB8574204E855700C91231 /* Model5toModel4.xcmappingmodel in Sources */,
 				D6A470A0205BA5D800F84180 /* Location+CoreDataProperties.m in Sources */,

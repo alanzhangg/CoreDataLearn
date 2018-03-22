@@ -25,12 +25,14 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="Item" inverseName="unit" inverseEntity="Item" syncable="YES"/>
     </entity>
-    <fetchRequest name="Test" entity="Item" predicateString="name CONTAINS &quot;e&quot;"/>
+    <fetchRequest name="ShoppingList" entity="Item" predicateString="listed == 1"/>
+    <fetchRequest name="UnknowLocationAtHome" entity="LocationAtHome" predicateString="storedIn == &quot;..UnknownLocation..&quot;"/>
+    <fetchRequest name="UnknowLocationAtShop" entity="LocationAtShop" predicateString="aisle == &quot;..UnknownLocation..&quot;"/>
     <elements>
         <element name="Item" positionX="-18" positionY="110" width="128" height="163"/>
-        <element name="Unit" positionX="178" positionY="269" width="128" height="73"/>
+        <element name="Location" positionX="-20" positionY="5" width="128" height="58"/>
         <element name="LocationAtHome" positionX="-207" positionY="84" width="128" height="73"/>
         <element name="LocationAtShop" positionX="160" positionY="72" width="128" height="73"/>
-        <element name="Location" positionX="-20" positionY="5" width="128" height="58"/>
+        <element name="Unit" positionX="178" positionY="269" width="128" height="73"/>
     </elements>
 </model>

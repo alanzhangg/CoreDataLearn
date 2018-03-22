@@ -64,28 +64,28 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     
-    CoreDataHelper * cdh = [self chd];
-    NSArray * homeLocations = [NSArray arrayWithObjects:@"Fruit Bowl", @"Pantry", @"Nursery", @"Bathroom", @"Fridge", nil];
-    NSArray * shopLocation = [NSArray arrayWithObjects:@"Produce", @"Aisle 1", @"Aisle 2", @"Aisle 3", @"Deil", nil];
-    NSArray * unitNames = [NSArray arrayWithObjects:@"g", @"pkt", @"box", @"ml", @"kg", nil];
-    NSArray * itemNames = [NSArray arrayWithObjects:@"Grapes", @"Biscuits", @"Nappies", @"Shampoo", @"Sausages", nil];
-    int i = 0;
-    for (NSString * itemName in itemNames) {
-        LocationAtHome * locationAtHome = [NSEntityDescription insertNewObjectForEntityForName:@"LocationAtHome" inManagedObjectContext:cdh.context];
-        LocationAtShop * locationAtShop = [NSEntityDescription insertNewObjectForEntityForName:@"LocationAtShop" inManagedObjectContext:cdh.context];
-        Unit * unit = [NSEntityDescription insertNewObjectForEntityForName:@"Unit" inManagedObjectContext:cdh.context];
-        Item * item = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:cdh.context];
-        locationAtHome.storedIn = [homeLocations objectAtIndex:i];
-        locationAtShop.aisle = [shopLocation objectAtIndex:i];
-        unit.name = unitNames[i];
-        item.name = itemNames[i];
-
-        item.locationAtHome = locationAtHome;
-        item.locationAtShop = locationAtShop;
-        item.unit = unit;
-        i++;
-    }
-    [cdh saveContext];
+//    CoreDataHelper * cdh = [self chd];
+//    NSArray * homeLocations = [NSArray arrayWithObjects:@"Fruit Bowl", @"Pantry", @"Nursery", @"Bathroom", @"Fridge", nil];
+//    NSArray * shopLocation = [NSArray arrayWithObjects:@"Produce", @"Aisle 1", @"Aisle 2", @"Aisle 3", @"Deil", nil];
+//    NSArray * unitNames = [NSArray arrayWithObjects:@"g", @"pkt", @"box", @"ml", @"kg", nil];
+//    NSArray * itemNames = [NSArray arrayWithObjects:@"Grapes", @"Biscuits", @"Nappies", @"Shampoo", @"Sausages", nil];
+//    int i = 0;
+//    for (NSString * itemName in itemNames) {
+//        LocationAtHome * locationAtHome = [NSEntityDescription insertNewObjectForEntityForName:@"LocationAtHome" inManagedObjectContext:cdh.context];
+//        LocationAtShop * locationAtShop = [NSEntityDescription insertNewObjectForEntityForName:@"LocationAtShop" inManagedObjectContext:cdh.context];
+//        Unit * unit = [NSEntityDescription insertNewObjectForEntityForName:@"Unit" inManagedObjectContext:cdh.context];
+//        Item * item = [NSEntityDescription insertNewObjectForEntityForName:@"Item" inManagedObjectContext:cdh.context];
+//        locationAtHome.storedIn = [homeLocations objectAtIndex:i];
+//        locationAtShop.aisle = [shopLocation objectAtIndex:i];
+//        unit.name = unitNames[i];
+//        item.name = itemNames[i];
+//
+//        item.locationAtHome = locationAtHome;
+//        item.locationAtShop = locationAtShop;
+//        item.unit = unit;
+//        i++;
+//    }
+//    [cdh saveContext];
 
     //    [self showUnitAndItemCount];
 //    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
