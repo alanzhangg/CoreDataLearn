@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -165,6 +166,14 @@
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="decimalPad"/>
                                             </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWB-bx-TN6">
+                                                <rect key="frame" x="287" y="87" width="48" height="48"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="add_units"/>
+                                                <connections>
+                                                    <segue destination="Jyx-uk-d7u" kind="modal" identifier="Units" id="BeS-8U-Z1C"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -368,7 +377,7 @@
             </objects>
             <point key="canvasLocation" x="2766" y="-197"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Units-->
         <scene sceneID="tgc-lH-dF7">
             <objects>
                 <tableViewController id="Ggj-si-61X" sceneMemberID="viewController">
@@ -377,7 +386,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="6Qm-o6-2iT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Unit Cell" id="6Qm-o6-2iT">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6Qm-o6-2iT" id="Nqm-Fj-xyi">
@@ -396,7 +405,7 @@
                             <outlet property="delegate" destination="Ggj-si-61X" id="FEJ-B7-AXR"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2Ex-C4-OwK">
+                    <navigationItem key="navigationItem" title="Units" id="2Ex-C4-OwK">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="xst-bC-3hf"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dxw-ch-LX7">
                             <connections>
@@ -411,10 +420,10 @@
             </objects>
             <point key="canvasLocation" x="3559" y="-881"/>
         </scene>
-        <!--View Controller-->
+        <!--Unit-->
         <scene sceneID="EdL-v1-oQT">
             <objects>
-                <viewController id="dKL-MI-2DQ" sceneMemberID="viewController">
+                <viewController title="Unit" id="dKL-MI-2DQ" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="REg-3T-K27"/>
                         <viewControllerLayoutGuide type="bottom" id="qbB-YD-8Go"/>
@@ -427,18 +436,29 @@
                                 <rect key="frame" x="20" y="84" width="335" height="48"/>
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="93P-Pe-dJ4"/>
+                                    <constraint firstAttribute="height" constant="48" id="dXr-me-hj2"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Enter a unit of measurement,E.g.'ml', 'pkg' or 'items'" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zTl-4H-VBW">
+                                <rect key="frame" x="67" y="166" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gLy-Hh-RbF" firstAttribute="top" secondItem="REg-3T-K27" secondAttribute="bottom" constant="20" id="Bw2-7e-VuL"/>
-                            <constraint firstAttribute="trailing" secondItem="gLy-Hh-RbF" secondAttribute="trailing" constant="20" id="hAd-IB-4Jt"/>
-                            <constraint firstItem="gLy-Hh-RbF" firstAttribute="leading" secondItem="sHw-3T-oTn" secondAttribute="leading" constant="20" id="rcC-AH-oWL"/>
+                            <constraint firstItem="gLy-Hh-RbF" firstAttribute="leading" secondItem="sHw-3T-oTn" secondAttribute="leadingMargin" constant="4" id="3sb-MJ-j6L"/>
+                            <constraint firstItem="zTl-4H-VBW" firstAttribute="top" secondItem="gLy-Hh-RbF" secondAttribute="bottom" constant="34" id="Sii-7Y-dKf"/>
+                            <constraint firstItem="gLy-Hh-RbF" firstAttribute="centerX" secondItem="zTl-4H-VBW" secondAttribute="centerX" id="TtZ-TP-53W"/>
+                            <constraint firstItem="qbB-YD-8Go" firstAttribute="top" secondItem="zTl-4H-VBW" secondAttribute="bottom" constant="373" id="V4S-gh-ViC"/>
+                            <constraint firstItem="gLy-Hh-RbF" firstAttribute="top" secondItem="REg-3T-K27" secondAttribute="bottom" constant="20" id="aef-ca-GI4"/>
+                            <constraint firstItem="zTl-4H-VBW" firstAttribute="centerX" secondItem="sHw-3T-oTn" secondAttribute="centerX" id="qB6-ns-YZP"/>
+                            <constraint firstItem="zTl-4H-VBW" firstAttribute="leading" secondItem="sHw-3T-oTn" secondAttribute="leadingMargin" constant="51" id="u24-Tj-60m"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -562,6 +582,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add_units" width="48" height="48"/>
         <image name="prepare" width="28" height="22"/>
         <image name="shop" width="30" height="25"/>
     </resources>
