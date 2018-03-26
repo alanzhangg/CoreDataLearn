@@ -30,7 +30,7 @@
     [self performFetch];
     self.clearConfirmActionSheet.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preformFetch) name:@"SomethingChanged" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetch) name:@"SomethingChanged" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,6 +169,25 @@
     [request setFetchBatchSize:50];
     self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:cdh.context sectionNameKeyPath:@"locationAtHome.storedIn" cacheName:nil];
     self.frc.delegate = self;
+}
+
+#pragma mark - FETCHING
+
+- (void)performFetch{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (self.frc) {
+        [self.frc.managedObjectContext performBlockAndWait:^{
+            NSError * error = nil;
+            if (![self.frc performFetch:&error]) {
+                NSLog(@"Failed to perform fetch: %@", error);
+            }
+            [self.tableView reloadData];
+        }];
+    }else{
+        NSLog(@"Failed to fetch, the fetched results controller is nil.");
+    }
 }
 
 #pragma mark - SEGUE
