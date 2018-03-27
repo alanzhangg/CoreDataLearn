@@ -10,6 +10,7 @@
 #import "Item+CoreDataClass.h"
 #import "LocationAtHome+CoreDataClass.h"
 #import "LocationAtShop+CoreDataClass.h"
+#import "Unit+CoreDataClass.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

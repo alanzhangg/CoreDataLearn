@@ -1,17 +1,17 @@
 //
-//  UnitPickerTF.m
+//  LocationAtHomePickerTF.m
 //  Grocery Dude
 //
 //  Created by alanzhangg on 2018/3/27.
 //  Copyright © 2018年 jilian. All rights reserved.
 //
 
-#import "UnitPickerTF.h"
+#import "LocationAtHomePickerTF.h"
 #import "CoreDataHelper.h"
 #import "AppDelegate.h"
-#import "Unit+CoreDataProperties.h"
+#import "LocationAtHome+CoreDataClass.h"
 
-@implementation UnitPickerTF
+@implementation LocationAtHomePickerTF
 
 #define debug 1
 
@@ -20,8 +20,8 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     CoreDataHelper * cdh = [(AppDelegate *)[UIApplication sharedApplication].delegate chd];
-    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
-    NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"LocationAtHome"];
+    NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"storeIn" ascending:YES];
     [request setSortDescriptors:@[sort]];
     [request setFetchBatchSize:50];
     NSError * error;
@@ -39,10 +39,10 @@
     }
     if (self.selectedObjectID && [self.pickerData count] > 0) {
         CoreDataHelper * cdh = [(AppDelegate *)[UIApplication sharedApplication].delegate chd];
-        Unit * selectedObject = (Unit *)[cdh.context existingObjectWithID:self.selectedObjectID error:nil];
+        LocationAtHome * selectedObject = (LocationAtHome *)[cdh.context existingObjectWithID:self.selectedObjectID error:nil];
         
-        [self.pickerData enumerateObjectsUsingBlock:^(Unit * unit, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([unit.name compare:selectedObject.name] == NSOrderedSame) {
+        [self.pickerData enumerateObjectsUsingBlock:^(LocationAtHome * locationAtHome, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([locationAtHome.storedIn compare:selectedObject.storedIn] == NSOrderedSame) {
                 [self.picker selectRow:idx inComponent:0 animated:NO];
                 [self.pickerDelegate selectObjectID:self.selectedObjectID changeForPickerTF:self];
                 *stop = YES;
@@ -55,8 +55,8 @@
     if (debug == 1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
-    Unit * unit = [self.pickerData objectAtIndex:row];
-    return unit.name;
+    LocationAtHome * locationAtHome = [self.pickerData objectAtIndex:row];
+    return locationAtHome.storedIn;
 }
 
 @end

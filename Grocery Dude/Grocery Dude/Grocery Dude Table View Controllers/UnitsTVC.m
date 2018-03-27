@@ -93,12 +93,12 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
-    NSFetchRequest * request = [[cdh.model fetchRequestTemplateForName:@"ShoppingList"] copy];
+    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"Unit"];
     request.sortDescriptors = @[
                                 [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]
                                 ];
     [request setFetchBatchSize:50];
-    self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:cdh.context sectionNameKeyPath:@"locationAtShop.aisle" cacheName:nil];
+    self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:cdh.context sectionNameKeyPath:nil cacheName:nil];
     self.frc.delegate = self;
 }
 

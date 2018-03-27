@@ -27,6 +27,8 @@
 		D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */; };
 		D69D9AF42069E3D800D1CE08 /* CoreDataPickerTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */; };
 		D69D9AF82069F34B00D1CE08 /* UnitPickerTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D69D9AF72069F34B00D1CE08 /* UnitPickerTF.m */; };
+		D69D9AFB206A254B00D1CE08 /* LocationAtHomePickerTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D69D9AFA206A254B00D1CE08 /* LocationAtHomePickerTF.m */; };
+		D69D9AFE206A277800D1CE08 /* LocationAtShopPickerTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D69D9AFD206A277800D1CE08 /* LocationAtShopPickerTF.m */; };
 		D6A3367820527C400038EF00 /* PrepareTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3367720527C400038EF00 /* PrepareTVC.m */; };
 		D6A47099205BA5D800F84180 /* Unit+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47087205BA5D800F84180 /* Unit+CoreDataClass.m */; };
 		D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47088205BA5D800F84180 /* Unit+CoreDataProperties.m */; };
@@ -104,6 +106,10 @@
 		D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataPickerTF.m; sourceTree = "<group>"; };
 		D69D9AF62069F34B00D1CE08 /* UnitPickerTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitPickerTF.h; sourceTree = "<group>"; };
 		D69D9AF72069F34B00D1CE08 /* UnitPickerTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitPickerTF.m; sourceTree = "<group>"; };
+		D69D9AF9206A254B00D1CE08 /* LocationAtHomePickerTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationAtHomePickerTF.h; sourceTree = "<group>"; };
+		D69D9AFA206A254B00D1CE08 /* LocationAtHomePickerTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationAtHomePickerTF.m; sourceTree = "<group>"; };
+		D69D9AFC206A277800D1CE08 /* LocationAtShopPickerTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationAtShopPickerTF.h; sourceTree = "<group>"; };
+		D69D9AFD206A277800D1CE08 /* LocationAtShopPickerTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationAtShopPickerTF.m; sourceTree = "<group>"; };
 		D6A3367620527C400038EF00 /* PrepareTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrepareTVC.h; sourceTree = "<group>"; };
 		D6A3367720527C400038EF00 /* PrepareTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrepareTVC.m; sourceTree = "<group>"; };
 		D6A47085205BA5D800F84180 /* Unit+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit+CoreDataProperties.h"; path = "Grocery Dude/Data Model/Unit+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -274,6 +280,10 @@
 			children = (
 				D69D9AF62069F34B00D1CE08 /* UnitPickerTF.h */,
 				D69D9AF72069F34B00D1CE08 /* UnitPickerTF.m */,
+				D69D9AF9206A254B00D1CE08 /* LocationAtHomePickerTF.h */,
+				D69D9AFA206A254B00D1CE08 /* LocationAtHomePickerTF.m */,
+				D69D9AFC206A277800D1CE08 /* LocationAtShopPickerTF.h */,
+				D69D9AFD206A277800D1CE08 /* LocationAtShopPickerTF.m */,
 			);
 			path = "Grocery Dude Picker Text Fields";
 			sourceTree = "<group>";
@@ -464,9 +474,11 @@
 				D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */,
 				D6AB856A204E705600C91231 /* MigrationVC.m in Sources */,
 				D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */,
+				D69D9AFB206A254B00D1CE08 /* LocationAtHomePickerTF.m in Sources */,
 				D64BB675206895D400050B3E /* UnitsTVC.m in Sources */,
 				D64BB67820689C4A00050B3E /* UnitVC.m in Sources */,
 				D64BB67E2068A71000050B3E /* LocationsAtHomeTVC.m in Sources */,
+				D69D9AFE206A277800D1CE08 /* LocationAtShopPickerTF.m in Sources */,
 				D69D9AF42069E3D800D1CE08 /* CoreDataPickerTF.m in Sources */,
 				D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */,
 				D6A470A7205BA86200F84180 /* Item+CoreDataClass.m in Sources */,

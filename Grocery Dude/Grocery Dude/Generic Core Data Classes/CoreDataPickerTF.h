@@ -27,4 +27,7 @@
 @property (nonatomic, assign) BOOL showToolBar;
 @property (nonatomic, strong) NSManagedObjectID * selectedObjectID;
 
+- (void)fetch;
+- (void)selectDefaultRow;
+
 @end
