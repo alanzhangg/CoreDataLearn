@@ -25,6 +25,8 @@
 		D694DABB204D0AA100575ABC /* Grocery_DudeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DABA204D0AA100575ABC /* Grocery_DudeUITests.m */; };
 		D694DACB204D0B1000575ABC /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DAC9204D0B1000575ABC /* CoreDataHelper.m */; };
 		D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */; };
+		D69D9AF42069E3D800D1CE08 /* CoreDataPickerTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */; };
+		D69D9AF82069F34B00D1CE08 /* UnitPickerTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D69D9AF72069F34B00D1CE08 /* UnitPickerTF.m */; };
 		D6A3367820527C400038EF00 /* PrepareTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3367720527C400038EF00 /* PrepareTVC.m */; };
 		D6A47099205BA5D800F84180 /* Unit+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47087205BA5D800F84180 /* Unit+CoreDataClass.m */; };
 		D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A47088205BA5D800F84180 /* Unit+CoreDataProperties.m */; };
@@ -98,6 +100,10 @@
 		D694DACA204D0B1000575ABC /* CoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
 		D694DACE204D0B3D00575ABC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		D694DAD0204D334400575ABC /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
+		D69D9AF22069E3D800D1CE08 /* CoreDataPickerTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataPickerTF.h; sourceTree = "<group>"; };
+		D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataPickerTF.m; sourceTree = "<group>"; };
+		D69D9AF62069F34B00D1CE08 /* UnitPickerTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitPickerTF.h; sourceTree = "<group>"; };
+		D69D9AF72069F34B00D1CE08 /* UnitPickerTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitPickerTF.m; sourceTree = "<group>"; };
 		D6A3367620527C400038EF00 /* PrepareTVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrepareTVC.h; sourceTree = "<group>"; };
 		D6A3367720527C400038EF00 /* PrepareTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrepareTVC.m; sourceTree = "<group>"; };
 		D6A47085205BA5D800F84180 /* Unit+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Unit+CoreDataProperties.h"; path = "Grocery Dude/Data Model/Unit+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -202,6 +208,7 @@
 		D694DA95204D0AA100575ABC /* Grocery Dude */ = {
 			isa = PBXGroup;
 			children = (
+				D69D9AF52069F2E700D1CE08 /* Grocery Dude Picker Text Fields */,
 				D6A3367520527BF70038EF00 /* Grocery Dude Table View Controllers */,
 				D6AB8567204E700900C91231 /* Grocery Dude View Controller */,
 				D694DACC204D0B2B00575ABC /* Data Model */,
@@ -244,6 +251,8 @@
 				D694DAC9204D0B1000575ABC /* CoreDataHelper.m */,
 				D6A51939204F8E7A00016821 /* CoreDataTVC.h */,
 				D6A5193A204F8E7A00016821 /* CoreDataTVC.m */,
+				D69D9AF22069E3D800D1CE08 /* CoreDataPickerTF.h */,
+				D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */,
 			);
 			path = "Generic Core Data Classes";
 			sourceTree = "<group>";
@@ -258,6 +267,15 @@
 				D6AB856C204E7FB000C91231 /* Model3toModel4.xcmappingmodel */,
 			);
 			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		D69D9AF52069F2E700D1CE08 /* Grocery Dude Picker Text Fields */ = {
+			isa = PBXGroup;
+			children = (
+				D69D9AF62069F34B00D1CE08 /* UnitPickerTF.h */,
+				D69D9AF72069F34B00D1CE08 /* UnitPickerTF.m */,
+			);
+			path = "Grocery Dude Picker Text Fields";
 			sourceTree = "<group>";
 		};
 		D6A3367520527BF70038EF00 /* Grocery Dude Table View Controllers */ = {
@@ -428,6 +446,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6A4709F205BA5D800F84180 /* Location+CoreDataClass.m in Sources */,
+				D69D9AF82069F34B00D1CE08 /* UnitPickerTF.m in Sources */,
 				D6A5193B204F8E7A00016821 /* CoreDataTVC.m in Sources */,
 				D6A470A8205BA86200F84180 /* Item+CoreDataProperties.m in Sources */,
 				D655B99120624F860079D9A3 /* ItemVC.m in Sources */,
@@ -448,6 +467,7 @@
 				D64BB675206895D400050B3E /* UnitsTVC.m in Sources */,
 				D64BB67820689C4A00050B3E /* UnitVC.m in Sources */,
 				D64BB67E2068A71000050B3E /* LocationsAtHomeTVC.m in Sources */,
+				D69D9AF42069E3D800D1CE08 /* CoreDataPickerTF.m in Sources */,
 				D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */,
 				D6A470A7205BA86200F84180 /* Item+CoreDataClass.m in Sources */,
 				D6AB8574204E855700C91231 /* Model5toModel4.xcmappingmodel in Sources */,
