@@ -21,7 +21,7 @@
     }
     CoreDataHelper * cdh = [(AppDelegate *)[UIApplication sharedApplication].delegate chd];
     NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"LocationAtHome"];
-    NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"storeIn" ascending:YES];
+    NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"storedIn" ascending:YES];
     [request setSortDescriptors:@[sort]];
     [request setFetchBatchSize:50];
     NSError * error;

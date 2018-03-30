@@ -15,6 +15,8 @@
 		D64BB6842068A72300050B3E /* LocationAtHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D64BB6812068A72300050B3E /* LocationAtHomeVC.m */; };
 		D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B98D206239EA0079D9A3 /* ShopTVC.m */; };
 		D655B99120624F860079D9A3 /* ItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B99020624F860079D9A3 /* ItemVC.m */; };
+		D6818F8F206B47DA0079068A /* DefaultData.xml in Resources */ = {isa = PBXBuildFile; fileRef = D6818F8E206B47DA0079068A /* DefaultData.xml */; };
+		D6818F92206B77990079068A /* CoreDataImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6818F91206B77990079068A /* CoreDataImporter.m */; };
 		D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DA97204D0AA100575ABC /* AppDelegate.m */; };
 		D694DA9B204D0AA100575ABC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DA9A204D0AA100575ABC /* ViewController.m */; };
 		D694DA9E204D0AA100575ABC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D694DA9C204D0AA100575ABC /* Main.storyboard */; };
@@ -82,6 +84,9 @@
 		D655B98D206239EA0079D9A3 /* ShopTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopTVC.m; sourceTree = "<group>"; };
 		D655B98F20624F860079D9A3 /* ItemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemVC.h; sourceTree = "<group>"; };
 		D655B99020624F860079D9A3 /* ItemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemVC.m; sourceTree = "<group>"; };
+		D6818F8E206B47DA0079068A /* DefaultData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultData.xml; sourceTree = "<group>"; };
+		D6818F90206B77990079068A /* CoreDataImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataImporter.h; sourceTree = "<group>"; };
+		D6818F91206B77990079068A /* CoreDataImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataImporter.m; sourceTree = "<group>"; };
 		D694DA93204D0AA100575ABC /* Grocery Dude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Dude.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D694DA96204D0AA100575ABC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D694DA97204D0AA100575ABC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -259,6 +264,8 @@
 				D6A5193A204F8E7A00016821 /* CoreDataTVC.m */,
 				D69D9AF22069E3D800D1CE08 /* CoreDataPickerTF.h */,
 				D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */,
+				D6818F90206B77990079068A /* CoreDataImporter.h */,
+				D6818F91206B77990079068A /* CoreDataImporter.m */,
 			);
 			path = "Generic Core Data Classes";
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 		D694DACC204D0B2B00575ABC /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				D6818F8E206B47DA0079068A /* DefaultData.xml */,
 				D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */,
 				D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */,
 				D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */,
@@ -429,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D694DAA3204D0AA100575ABC /* LaunchScreen.storyboard in Resources */,
+				D6818F8F206B47DA0079068A /* DefaultData.xml in Resources */,
 				D694DAA0204D0AA100575ABC /* Assets.xcassets in Resources */,
 				D694DA9E204D0AA100575ABC /* Main.storyboard in Resources */,
 			);
@@ -486,6 +495,7 @@
 				D6A470A0205BA5D800F84180 /* Location+CoreDataProperties.m in Sources */,
 				D694DACB204D0B1000575ABC /* CoreDataHelper.m in Sources */,
 				D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */,
+				D6818F92206B77990079068A /* CoreDataImporter.m in Sources */,
 				D6A47099205BA5D800F84180 /* Unit+CoreDataClass.m in Sources */,
 				D6AB8566204E681500C91231 /* Model2toModel3.xcmappingmodel in Sources */,
 				D6AB856D204E7FB000C91231 /* Model3toModel4.xcmappingmodel in Sources */,
