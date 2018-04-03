@@ -15,6 +15,7 @@
 
 #pragma mark - FILES
 NSString * storeFileName = @"Grocery-Dude.sqlite";
+NSString * sourceStoreFileName = @"DefaultData.sqlite";
 
 #pragma mark - DELEGATE: UIAlertView
 
@@ -71,6 +72,13 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
     return [[self applicationStoreDirection] URLByAppendingPathComponent:storeFileName];
 }
 
+- (NSURL *)sourceStoreURL{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    return [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:[sourceStoreFileName stringByDeletingPathExtension] ofType:[sourceStoreFileName pathExtension]]];
+}
+
 #pragma mark - SETUP
 
 - (instancetype)init{
@@ -91,6 +99,14 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
         [_importContext setPersistentStoreCoordinator:_coordinator];
         [_importContext setUndoManager:nil];
     }];
+    
+    _sourceCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
+    _sourceContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_sourceContext performBlockAndWait:^{
+        [_sourceContext setPersistentStoreCoordinator:_sourceCoordinator];
+        [_sourceContext setUndoManager:nil];
+    }];
+    
     return self;
 }
 
@@ -124,10 +140,31 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
     }
 }
 
+- (void)loadSourceStore{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (_sourceStore) {
+        return;
+    }
+    NSDictionary * options = @{
+                               NSReadOnlyPersistentStoreOption: @YES
+                               };
+    NSError * error = nil;
+    _sourceStore = [_sourceCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[self sourceStoreURL] options:options error:&error];
+    if (!_sourceStore) {
+        NSLog(@"Failed to add source store: Error: %@", error);
+        abort();
+    }else{
+        NSLog(@"Successfully added source store: %@", _sourceStore);
+    }
+}
+
 - (void)setupCoreData{
     if (debug == 1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
+//    [self setDefaultDataStoreAsInitialStore];
     [self loadStore];
     [self checkIfDefaultDataNeedsImporting];
 
@@ -381,6 +418,22 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
     }
 }
 
+- (void)setDefaultDataStoreAsInitialStore{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:[self storeURL].path]) {
+        NSURL * defaultDataURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DefaultData" ofType:@"sqlite"]];
+        NSError * error;
+        if (![fileManager copyItemAtURL:defaultDataURL toURL:[self storeURL] error:&error]) {
+            NSLog(@"DefautData.Sqlite copy FAIL: %@", error.localizedDescription);
+        }else{
+            NSLog(@"A copy of DefaultData.sqlite was set as the initial store for %@", [self storeURL].path);
+        }
+    }
+}
+
 #pragma mark - UNIQUE ATTRIBUTE SELECTION (this code is Grocery Dude data specific and is used when instantiating CoreDataImporter)
 
 - (NSDictionary *)selectedUniqueAttributes{
@@ -445,5 +498,7 @@ NSString * storeFileName = @"Grocery-Dude.sqlite";
         }
     }];
 }
+
+
 
 @end

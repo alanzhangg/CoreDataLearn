@@ -117,6 +117,121 @@
     return [self insertUniqueObjectInTargetEntity:entity uniqueAttributeValue:[attributeDict valueForKey:sourceXMLAttribute] attributeValues:attributeValues inContext:context];
 }
 
+#pragma mark - DEEP COPY
 
+- (NSString *)objectInfo:(NSManagedObject *)object{
+    if (!object) {
+        return nil;
+    }
+    NSString * entity = object.entity.name;
+    NSString * uniqueAttribute = [self uniqueAttributeForEntity:entity];
+    NSString * uniqueAttributeValue = [object valueForKey:uniqueAttribute];
+    return [NSString stringWithFormat:@"%@ '%@'", entity, uniqueAttributeValue];
+}
+
+- (NSArray *)arrayForEntity:(NSString *)entity
+                  inContext:(NSManagedObjectContext *)context
+              withPredicate:(NSPredicate *)predicate{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:entity];
+    [request setFetchBatchSize:50];
+    [request setPredicate:predicate];
+    NSError * error;
+    NSAsynchronousFetchResult * result = [context executeRequest:request error:&error];
+    NSArray * array = result.finalResult;
+    if (error) {
+        NSLog(@"ERROR fetching objects: %@", error.localizedDescription);
+    }
+    return array;
+}
+
+- (NSManagedObject *)copyUniqueObject:(NSManagedObject *)object
+                            toContext:(NSManagedObjectContext *)targetContext{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (!object || !targetContext) {
+        NSLog(@"FAILED to copy %@ to context %@", [self objectInfo:object], targetContext);
+        return nil;
+    }
+    NSString * entity = object.entity.name;
+    NSString * uniqueAttribute = [self uniqueAttributeForEntity:entity];
+    NSString * uniqueAttributeValue = [object valueForKey:uniqueAttribute];
+    if (uniqueAttributeValue.length > 0) {
+        NSMutableDictionary * attributeValuesToCopy = [NSMutableDictionary new];
+        for (NSString * attribute in object.entity.attributesByName) {
+            [attributeValuesToCopy setObject:[[object valueForKey:attribute] copy] forKey:attribute];
+        }
+        NSManagedObject * coppiedObject = [self insertUniqueObjectInTargetEntity:entity uniqueAttributeValue:uniqueAttributeValue attributeValues:attributeValuesToCopy inContext:targetContext];
+        return coppiedObject;
+    }
+    return nil;
+}
+
+- (void)establishToOneRelationship:(NSString *)relationshipName
+                        fromObject:(NSManagedObject *)object
+                          toObject:(NSManagedObject *)relationObject{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (!relationshipName || !object || !relationObject) {
+        NSLog(@"SKIPPED establishing To-One relationship '%@' between %@ and %@",
+              relationshipName,
+              [self objectInfo:object],
+              [self objectInfo:relationObject]);
+        NSLog(@"Due to missing Info!");
+        return;
+    }
+    
+    NSManagedObject * existingRelatedObject = [object valueForKey:relationshipName];
+    if (existingRelatedObject) {
+        return;
+    }
+    
+    NSDictionary * relationships = [object.entity relationshipsByName];
+    NSRelationshipDescription * relationship = [relationships objectForKey:relationshipName];
+    if (![relationObject.entity isEqual:relationship.destinationEntity]) {
+        NSLog(@"%@ id the of wrog entity type to relate to %@", [self objectInfo:object], [self objectInfo:relationObject]);
+        return;
+    }
+    
+    [object setValue:relationObject forKey:relationshipName];
+    NSLog(@"ESTABLISHED %@ relationship from %@ to %@",
+          relationshipName,
+          [self objectInfo:object],
+          [self objectInfo:relationObject]);
+    
+    [CoreDataImporter saveContext:relationObject.managedObjectContext];
+    [CoreDataImporter saveContext:object.managedObjectContext];
+    [object.managedObjectContext refreshObject:object mergeChanges:NO];
+    [relationObject.managedObjectContext refreshObject:relationObject mergeChanges:NO];
+}
+
+- (void)establishToManyRelationship:(NSString *)relationshipName
+                         fromObject:(NSManagedObject *)object
+                      withSourceSet:(NSMutableSet *)sourceSet{
+    if (!object || !sourceSet || !relationshipName) {
+        NSLog(@"SKIPPED establishing a To-Many relationship from %@",
+              [self objectInfo:object]);
+        NSLog(@"Due to missing Info!");
+        return;
+    }
+    NSMutableSet * copiedSet = [object mutableSetValueForKey:relationshipName];
+    for (NSManagedObject * relationObject in sourceSet) {
+        NSManagedObject * copiedRelatedObject = [self copyUniqueObject:relationObject toContext:object.managedObjectContext];
+        if (copiedRelatedObject) {
+            [copiedSet addObject:copiedRelatedObject];
+            NSLog(@"A copy of %@ is now related via To-Many '%@' relationship to %@",
+                  [self objectInfo:object],
+                  relationshipName,
+                  [self objectInfo:copiedRelatedObject]);
+        }
+    }
+    
+    [CoreDataImporter saveContext:object.managedObjectContext];
+    [object.managedObjectContext refreshObject:object mergeChanges:NO];
+}
 
 @end

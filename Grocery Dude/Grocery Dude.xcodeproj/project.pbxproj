@@ -15,6 +15,7 @@
 		D64BB6842068A72300050B3E /* LocationAtHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D64BB6812068A72300050B3E /* LocationAtHomeVC.m */; };
 		D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B98D206239EA0079D9A3 /* ShopTVC.m */; };
 		D655B99120624F860079D9A3 /* ItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B99020624F860079D9A3 /* ItemVC.m */; };
+		D6800C51206E222000FD3E0C /* DefaultData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D6800C50206E221F00FD3E0C /* DefaultData.sqlite */; };
 		D6818F8F206B47DA0079068A /* DefaultData.xml in Resources */ = {isa = PBXBuildFile; fileRef = D6818F8E206B47DA0079068A /* DefaultData.xml */; };
 		D6818F92206B77990079068A /* CoreDataImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6818F91206B77990079068A /* CoreDataImporter.m */; };
 		D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DA97204D0AA100575ABC /* AppDelegate.m */; };
@@ -84,6 +85,7 @@
 		D655B98D206239EA0079D9A3 /* ShopTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopTVC.m; sourceTree = "<group>"; };
 		D655B98F20624F860079D9A3 /* ItemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemVC.h; sourceTree = "<group>"; };
 		D655B99020624F860079D9A3 /* ItemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemVC.m; sourceTree = "<group>"; };
+		D6800C50206E221F00FD3E0C /* DefaultData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DefaultData.sqlite; sourceTree = "<group>"; };
 		D6818F8E206B47DA0079068A /* DefaultData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultData.xml; sourceTree = "<group>"; };
 		D6818F90206B77990079068A /* CoreDataImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataImporter.h; sourceTree = "<group>"; };
 		D6818F91206B77990079068A /* CoreDataImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataImporter.m; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 		D694DACC204D0B2B00575ABC /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				D6800C50206E221F00FD3E0C /* DefaultData.sqlite */,
 				D6818F8E206B47DA0079068A /* DefaultData.xml */,
 				D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */,
 				D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */,
@@ -436,6 +439,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6800C51206E222000FD3E0C /* DefaultData.sqlite in Resources */,
 				D694DAA3204D0AA100575ABC /* LaunchScreen.storyboard in Resources */,
 				D6818F8F206B47DA0079068A /* DefaultData.xml in Resources */,
 				D694DAA0204D0AA100575ABC /* Assets.xcassets in Resources */,
