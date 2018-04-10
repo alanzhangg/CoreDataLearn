@@ -26,9 +26,12 @@ NSString * sourceStoreFileName = @"DefaultData.sqlite";
     if (alertView == self.importAlertView) {
         if (buttonIndex == 1) {
             NSLog(@"Default Data Import Approved by User");
-            [_importContext performBlock:^{
-                [self importFromXML:[[NSBundle mainBundle] URLForResource:@"DefaultData" withExtension:@"xml"]];
-            }];
+//            [_importContext performBlock:^{
+//                [self importFromXML:[[NSBundle mainBundle] URLForResource:@"DefaultData" withExtension:@"xml"]];
+//            }];
+            //deep copy
+            [self loadSourceStore];
+            [self deepCopyFromPersistentStore:[self sourceStoreURL]];
         }else{
             NSLog(@"Default Data Import Cancelled by User");
         }
@@ -499,6 +502,35 @@ NSString * sourceStoreFileName = @"DefaultData.sqlite";
     }];
 }
 
+- (void)deepCopyFromPersistentStore:(NSURL *)url{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    
+//    _importTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(somethingChanged) userInfo:nil repeats:YES];
+    
+    [_sourceContext performBlock:^{
+        NSLog(@"*** STARTED DEEP COPY***");
+        NSArray * entitiesToCopy = @[@"LocationAtHome", @"LocationAtShop", @"Unit", @"Item"];
+        CoreDataImporter * importer = [[CoreDataImporter alloc] initWithUniqueAttributes:[self selectedUniqueAttributes]];
+        [importer deepCopyEntities:entitiesToCopy
+                       fromContext:_sourceContext
+                         toContext:_importContext];
+        [_context performBlock:^{
+//            [_importTimer invalidate];
+//            [self somethingChanged];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SomethingChanged" object:nil];
+        }];
+        NSLog(@"*** FINISHED DEEP COPY***");
+    }];
+}
 
+#pragma mark - UNDERLYING DATA CHANGE NOTIFICATION
+- (void)somethingChanged{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SomethingChanged" object:nil];
+}
 
 @end

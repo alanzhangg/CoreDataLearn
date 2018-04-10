@@ -162,9 +162,13 @@
     if (uniqueAttributeValue.length > 0) {
         NSMutableDictionary * attributeValuesToCopy = [NSMutableDictionary new];
         for (NSString * attribute in object.entity.attributesByName) {
-            [attributeValuesToCopy setObject:[[object valueForKey:attribute] copy] forKey:attribute];
+            if ([object valueForKey:attribute]) {
+                [attributeValuesToCopy setObject:[[object valueForKey:attribute] copy] forKey:attribute];
+            }
         }
-        NSManagedObject * coppiedObject = [self insertUniqueObjectInTargetEntity:entity uniqueAttributeValue:uniqueAttributeValue attributeValues:attributeValuesToCopy inContext:targetContext];
+        NSManagedObject * coppiedObject = [self insertUniqueObjectInTargetEntity:entity
+                                                            uniqueAttributeValue:uniqueAttributeValue
+                                                        attributeValues:attributeValuesToCopy inContext:targetContext];
         return coppiedObject;
     }
     return nil;
@@ -172,15 +176,15 @@
 
 - (void)establishToOneRelationship:(NSString *)relationshipName
                         fromObject:(NSManagedObject *)object
-                          toObject:(NSManagedObject *)relationObject{
+                          toObject:(NSManagedObject *)relatedObject{
     if (debug == 1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
-    if (!relationshipName || !object || !relationObject) {
+    if (!relationshipName || !object || !relatedObject) {
         NSLog(@"SKIPPED establishing To-One relationship '%@' between %@ and %@",
               relationshipName,
               [self objectInfo:object],
-              [self objectInfo:relationObject]);
+              [self objectInfo:relatedObject]);
         NSLog(@"Due to missing Info!");
         return;
     }
@@ -192,21 +196,21 @@
     
     NSDictionary * relationships = [object.entity relationshipsByName];
     NSRelationshipDescription * relationship = [relationships objectForKey:relationshipName];
-    if (![relationObject.entity isEqual:relationship.destinationEntity]) {
-        NSLog(@"%@ id the of wrog entity type to relate to %@", [self objectInfo:object], [self objectInfo:relationObject]);
+    if (![relatedObject.entity isEqual:relationship.destinationEntity]) {
+        NSLog(@"%@ id the of wrog entity type to relate to %@", [self objectInfo:object], [self objectInfo:relatedObject]);
         return;
     }
     
-    [object setValue:relationObject forKey:relationshipName];
+    [object setValue:relatedObject forKey:relationshipName];
     NSLog(@"ESTABLISHED %@ relationship from %@ to %@",
           relationshipName,
           [self objectInfo:object],
-          [self objectInfo:relationObject]);
+          [self objectInfo:relatedObject]);
     
-    [CoreDataImporter saveContext:relationObject.managedObjectContext];
+    [CoreDataImporter saveContext:relatedObject.managedObjectContext];
     [CoreDataImporter saveContext:object.managedObjectContext];
     [object.managedObjectContext refreshObject:object mergeChanges:NO];
-    [relationObject.managedObjectContext refreshObject:relationObject mergeChanges:NO];
+    [relatedObject.managedObjectContext refreshObject:relatedObject mergeChanges:NO];
 }
 
 - (void)establishToManyRelationship:(NSString *)relationshipName
@@ -219,8 +223,8 @@
         return;
     }
     NSMutableSet * copiedSet = [object mutableSetValueForKey:relationshipName];
-    for (NSManagedObject * relationObject in sourceSet) {
-        NSManagedObject * copiedRelatedObject = [self copyUniqueObject:relationObject toContext:object.managedObjectContext];
+    for (NSManagedObject * relatedObject in sourceSet) {
+        NSManagedObject * copiedRelatedObject = [self copyUniqueObject:relatedObject toContext:object.managedObjectContext];
         if (copiedRelatedObject) {
             [copiedSet addObject:copiedRelatedObject];
             NSLog(@"A copy of %@ is now related via To-Many '%@' relationship to %@",
@@ -229,9 +233,94 @@
                   [self objectInfo:copiedRelatedObject]);
         }
     }
-    
     [CoreDataImporter saveContext:object.managedObjectContext];
     [object.managedObjectContext refreshObject:object mergeChanges:NO];
+}
+
+- (void)establishOrderedToManyRelationship:(NSString *)relationshipName
+                                fromObject:(NSManagedObject *)object
+                             withSourceSet:(NSMutableOrderedSet *)sourceSet{
+    if (!object || !sourceSet || !relationshipName) {
+        NSLog(@"Skipped establishment of an Ordered To-Many relationship from %@",
+              [self objectInfo:object]);
+        NSLog(@"Due to missing Info!");
+        return;
+    }
+    
+    NSMutableOrderedSet * copiedSet = [self mutableOrderedSetValueForKey:relationshipName];
+    
+    for (NSManagedObject * relatedObject in sourceSet) {
+        NSManagedObject * copiedRelatedObject = [self copyUniqueObject:relatedObject toContext:object.managedObjectContext];
+        
+        if (copiedRelatedObject) {
+            [copiedSet addObject:copiedRelatedObject];
+            NSLog(@"A copy of %@ is related via Ordered To-Many '%@' relationship to %@",[self objectInfo:object], relationshipName, [self objectInfo:copiedRelatedObject]);
+        }
+    }
+    [CoreDataImporter saveContext:object.managedObjectContext];
+    [object.managedObjectContext refreshObject:object mergeChanges:NO];
+}
+
+- (void)copyRelationshipsFromObject:(NSManagedObject *)sourceObject
+                          toContext:(NSManagedObjectContext *)targetContext{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if (!sourceObject || !targetContext) {
+        NSLog(@"Failed to copy relationships from '%@' to context '%@'", [self objectInfo:sourceObject], targetContext);
+        return;
+    }
+    
+    NSManagedObject * copiedObject = [self copyUniqueObject:sourceObject toContext:targetContext];
+    if (!copiedObject) {
+        return;
+    }
+    
+    // copy relationships
+    NSDictionary * relationships = [sourceObject.entity relationshipsByName];
+    for (NSString * relationshipName in relationships) {
+        
+        NSRelationshipDescription * relationship = [relationships objectForKey:relationshipName];
+        if ([sourceObject valueForKey:relationshipName]) {
+            if (relationship.isToMany && relationship.isOrdered) {
+                NSMutableOrderedSet * sourceSet = [sourceObject mutableOrderedSetValueForKey:relationshipName];
+                [self establishOrderedToManyRelationship:relationshipName
+                                              fromObject:copiedObject
+                                           withSourceSet:sourceSet];
+            }else if (relationship.isToMany && !relationship.isOrdered){
+                NSMutableSet * souceSet = [sourceObject mutableSetValueForKey:relationshipName];
+                [self establishToManyRelationship:relationshipName
+                                       fromObject:copiedObject
+                                    withSourceSet:souceSet];
+            }else{
+                NSManagedObject * relatedSourceObject = [sourceObject valueForKey:relationshipName];
+                NSManagedObject * relatedCopiedObject = [self copyUniqueObject:relatedSourceObject toContext:targetContext];
+                [self establishToOneRelationship:relationshipName
+                                      fromObject:copiedObject
+                                        toObject:relatedCopiedObject];
+            }
+        }
+    }
+}
+
+- (void)deepCopyEntities:(NSArray *)entities
+             fromContext:(NSManagedObjectContext *)sourceContext
+               toContext:(NSManagedObjectContext *)targetContext{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    for (NSString * entity in entities) {
+        NSLog(@"COPYING %@ objects to target context...", entity);
+        NSArray * sourceObjects = [self arrayForEntity:entity inContext:sourceContext withPredicate:nil];
+        for (NSManagedObject * sourceObject in sourceObjects) {
+            if (sourceObject) {
+                @autoreleasepool{
+                    [self copyUniqueObject:sourceObject toContext:targetContext];
+                    [self copyRelationshipsFromObject:sourceObject toContext:targetContext];
+                }
+            }
+        }
+    }
 }
 
 @end
