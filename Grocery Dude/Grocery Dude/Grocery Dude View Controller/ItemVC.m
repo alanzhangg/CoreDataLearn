@@ -12,7 +12,7 @@
 #import "LocationAtHomePickerTF.h"
 #import "LocationAtShopPickerTF.h"
 
-@interface ItemVC ()<UITextFieldDelegate, CoreDataPickerTFDelegate>
+@interface ItemVC ()<UITextFieldDelegate, CoreDataPickerTFDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *quantityTextField;
@@ -20,6 +20,10 @@
 @property (weak, nonatomic) IBOutlet LocationAtHomePickerTF *homeLocationPickerTextField;
 @property (weak, nonatomic) IBOutlet LocationAtShopPickerTF *shopLocationPickerTextField;
 @property (strong, nonatomic) IBOutlet UITextField * activeField;
+@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (strong, nonatomic) UIImagePickerController * camera;
+
 @end
 
 @implementation ItemVC
@@ -165,6 +169,14 @@
     CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
     [cdh saveContext];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSError * error;
+    Item * item = (Item *)[cdh.context existingObjectWithID:self.selectedItemID error:&error];
+    if (error) {
+        NSLog(@"ERROR!!! ---> %@", error.localizedDescription);
+    }else{
+        [cdh.context refreshObject:item.photo mergeChanges:NO];
+        [cdh.context refreshObject:item mergeChanges:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -187,6 +199,8 @@
         self.homeLocationPickerTextField.selectedObjectID = item.locationAtHome.objectID;
         self.shopLocationPickerTextField.text = item.locationAtShop.aisle;
         self.shopLocationPickerTextField.selectedObjectID = item.locationAtShop.objectID;
+        self.photoImageView.image = [UIImage imageWithData:item.photo.data];
+        [self checkCamera];
     }
 }
 
@@ -289,6 +303,61 @@
             }
         }
     }
+}
+
+#pragma mark - CAMERA
+
+- (void)checkCamera{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    self.cameraButton.enabled = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (IBAction)showCamera:(id)sender{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSLog(@"Camera is availabel");
+        _camera = [[UIImagePickerController alloc] init];
+        _camera.sourceType = UIImagePickerControllerSourceTypeCamera;
+        _camera.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        _camera.allowsEditing = YES;
+        _camera.delegate = self;
+        [self.navigationController presentViewController:_camera animated:YES completion:nil];
+    }else{
+        NSLog(@"Camera not available");
+    }
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    Item * item = (Item *)[cdh.context existingObjectWithID:self.selectedItemID error:nil];
+    
+    UIImage * photo = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+    NSLog(@"Captured %f x %f photo", photo.size.height, photo.size.width);
+    
+//    item.photoData = UIImageJPEGRepresentation(photo, 0.5);
+    
+    if (!item.photo) {
+        Item_photo * newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Item_photo" inManagedObjectContext:cdh.context];
+        [cdh.context obtainPermanentIDsForObjects:@[newPhoto] error:nil];
+        item.photo = newPhoto;
+    }
+    item.photo.data = UIImageJPEGRepresentation(photo, 0.5);
+    self.photoImageView.image = photo;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 

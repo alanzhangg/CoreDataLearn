@@ -23,7 +23,7 @@
     NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"LocationAtHome"];
     NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"storedIn" ascending:YES];
     [request setSortDescriptors:@[sort]];
-    [request setFetchBatchSize:50];
+    [request setFetchBatchSize:20];
     NSError * error;
     NSAsynchronousFetchResult * result = [cdh.context executeRequest:request error:&error];
     self.pickerData = result.finalResult;

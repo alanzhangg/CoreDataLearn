@@ -24,7 +24,7 @@
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"LocationAtShop"];
     request.sortDescriptors = [NSArray arrayWithObjects:
                                [NSSortDescriptor sortDescriptorWithKey:@"aisle" ascending:YES],nil];
-    [request setFetchBatchSize:50];
+    [request setFetchBatchSize:20];
     self.frc =
     [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                         managedObjectContext:cdh.context

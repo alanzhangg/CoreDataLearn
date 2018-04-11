@@ -97,7 +97,7 @@
     request.sortDescriptors = @[
                                 [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]
                                 ];
-    [request setFetchBatchSize:50];
+    [request setFetchBatchSize:20];
     self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:cdh.context sectionNameKeyPath:nil cacheName:nil];
     self.frc.delegate = self;
 }

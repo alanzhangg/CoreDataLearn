@@ -62,7 +62,7 @@
         cell.textLabel.textColor = [UIColor orangeColor];
         cell.accessoryType = UITableViewCellAccessoryDetailButton;
     }
-    
+    cell.imageView.image = [UIImage imageWithData:item.thumbnail];
     return cell;
 }
 
@@ -132,7 +132,7 @@
                                 [NSSortDescriptor sortDescriptorWithKey:@"locationAtShop.aisle" ascending:YES],
                                 [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]
                                 ];
-    [request setFetchBatchSize:50];
+    [request setFetchBatchSize:20];
     self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:cdh.context sectionNameKeyPath:@"locationAtShop.aisle" cacheName:nil];
     self.frc.delegate = self;
 }

@@ -23,7 +23,7 @@
     NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:@"LocationAtShop"];
     NSSortDescriptor * sort = [NSSortDescriptor sortDescriptorWithKey:@"aisle" ascending:YES];
     [request setSortDescriptors:@[sort]];
-    [request setFetchBatchSize:50];
+    [request setFetchBatchSize:20];
     NSError * error;
     NSAsynchronousFetchResult * result = [cdh.context executeRequest:request error:&error];
     self.pickerData = result.finalResult;

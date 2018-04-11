@@ -136,7 +136,7 @@
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     NSFetchRequest * request = [NSFetchRequest fetchRequestWithEntityName:entity];
-    [request setFetchBatchSize:50];
+    [request setFetchBatchSize:20];
     [request setPredicate:predicate];
     NSError * error;
     NSAsynchronousFetchResult * result = [context executeRequest:request error:&error];

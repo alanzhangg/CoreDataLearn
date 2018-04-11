@@ -2,7 +2,7 @@
 //  LocationAtHome+CoreDataProperties.h
 //  Grocery Dude
 //
-//  Created by alanzhangg on 2018/3/16.
+//  Created by alanzhangg on 2018/4/11.
 //  Copyright © 2018年 jilian. All rights reserved.
 //
 //

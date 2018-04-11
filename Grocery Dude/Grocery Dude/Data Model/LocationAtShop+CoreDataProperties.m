@@ -2,7 +2,7 @@
 //  LocationAtShop+CoreDataProperties.m
 //  Grocery Dude
 //
-//  Created by alanzhangg on 2018/3/16.
+//  Created by alanzhangg on 2018/4/11.
 //  Copyright © 2018年 jilian. All rights reserved.
 //
 //
@@ -12,7 +12,7 @@
 @implementation LocationAtShop (CoreDataProperties)
 
 + (NSFetchRequest<LocationAtShop *> *)fetchRequest {
-	return [[NSFetchRequest alloc] initWithEntityName:@"LocationAtShop"];
+	return [NSFetchRequest fetchRequestWithEntityName:@"LocationAtShop"];
 }
 
 @dynamic aisle;

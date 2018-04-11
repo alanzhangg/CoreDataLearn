@@ -15,7 +15,10 @@
 		D64BB6842068A72300050B3E /* LocationAtHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D64BB6812068A72300050B3E /* LocationAtHomeVC.m */; };
 		D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B98D206239EA0079D9A3 /* ShopTVC.m */; };
 		D655B99120624F860079D9A3 /* ItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D655B99020624F860079D9A3 /* ItemVC.m */; };
-		D6800C51206E222000FD3E0C /* DefaultData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D6800C50206E221F00FD3E0C /* DefaultData.sqlite */; };
+		D673AACD207DEA4500CB2BF3 /* Model7toModel8.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D673AACC207DEA4500CB2BF3 /* Model7toModel8.xcmappingmodel */; };
+		D673AAD2207DEC2800CB2BF3 /* Item_photo+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = D673AAD0207DEC2800CB2BF3 /* Item_photo+CoreDataClass.m */; };
+		D673AAD3207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D673AAD1207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.m */; };
+		D673AAD7207DEE9000CB2BF3 /* DefaultData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = D673AAD6207DEE9000CB2BF3 /* DefaultData.sqlite */; };
 		D6818F8F206B47DA0079068A /* DefaultData.xml in Resources */ = {isa = PBXBuildFile; fileRef = D6818F8E206B47DA0079068A /* DefaultData.xml */; };
 		D6818F92206B77990079068A /* CoreDataImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6818F91206B77990079068A /* CoreDataImporter.m */; };
 		D694DA98204D0AA100575ABC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D694DA97204D0AA100575ABC /* AppDelegate.m */; };
@@ -85,7 +88,14 @@
 		D655B98D206239EA0079D9A3 /* ShopTVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShopTVC.m; sourceTree = "<group>"; };
 		D655B98F20624F860079D9A3 /* ItemVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemVC.h; sourceTree = "<group>"; };
 		D655B99020624F860079D9A3 /* ItemVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemVC.m; sourceTree = "<group>"; };
-		D6800C50206E221F00FD3E0C /* DefaultData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DefaultData.sqlite; sourceTree = "<group>"; };
+		D673AACA207DE65E00CB2BF3 /* Model 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 7.xcdatamodel"; sourceTree = "<group>"; };
+		D673AACB207DE7F800CB2BF3 /* Model 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 8.xcdatamodel"; sourceTree = "<group>"; };
+		D673AACC207DEA4500CB2BF3 /* Model7toModel8.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model7toModel8.xcmappingmodel; sourceTree = "<group>"; };
+		D673AACE207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Item_photo+CoreDataProperties.h"; path = "Grocery Dude/Data Model/Item_photo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D673AACF207DEC2800CB2BF3 /* Item_photo+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Item_photo+CoreDataClass.h"; path = "Grocery Dude/Data Model/Item_photo+CoreDataClass.h"; sourceTree = "<group>"; };
+		D673AAD0207DEC2800CB2BF3 /* Item_photo+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Item_photo+CoreDataClass.m"; path = "Grocery Dude/Data Model/Item_photo+CoreDataClass.m"; sourceTree = "<group>"; };
+		D673AAD1207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "Item_photo+CoreDataProperties.m"; path = "Grocery Dude/Data Model/Item_photo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D673AAD6207DEE9000CB2BF3 /* DefaultData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = DefaultData.sqlite; sourceTree = "<group>"; };
 		D6818F8E206B47DA0079068A /* DefaultData.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DefaultData.xml; sourceTree = "<group>"; };
 		D6818F90206B77990079068A /* CoreDataImporter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataImporter.h; sourceTree = "<group>"; };
 		D6818F91206B77990079068A /* CoreDataImporter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataImporter.m; sourceTree = "<group>"; };
@@ -181,6 +191,10 @@
 		D694DA8A204D0AA100575ABC = {
 			isa = PBXGroup;
 			children = (
+				D673AACE207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.h */,
+				D673AACF207DEC2800CB2BF3 /* Item_photo+CoreDataClass.h */,
+				D673AAD0207DEC2800CB2BF3 /* Item_photo+CoreDataClass.m */,
+				D673AAD1207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.m */,
 				D6A470A3205BA86200F84180 /* Item+CoreDataProperties.h */,
 				D6A470A4205BA86200F84180 /* Item+CoreDataClass.h */,
 				D6A470A5205BA86200F84180 /* Item+CoreDataClass.m */,
@@ -275,13 +289,14 @@
 		D694DACC204D0B2B00575ABC /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				D6800C50206E221F00FD3E0C /* DefaultData.sqlite */,
+				D673AAD6207DEE9000CB2BF3 /* DefaultData.sqlite */,
 				D6818F8E206B47DA0079068A /* DefaultData.xml */,
 				D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */,
 				D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */,
 				D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */,
 				D6AB8565204E681500C91231 /* Model2toModel3.xcmappingmodel */,
 				D6AB856C204E7FB000C91231 /* Model3toModel4.xcmappingmodel */,
+				D673AACC207DEA4500CB2BF3 /* Model7toModel8.xcmappingmodel */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -439,7 +454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6800C51206E222000FD3E0C /* DefaultData.sqlite in Resources */,
+				D673AAD7207DEE9000CB2BF3 /* DefaultData.sqlite in Resources */,
 				D694DAA3204D0AA100575ABC /* LaunchScreen.storyboard in Resources */,
 				D6818F8F206B47DA0079068A /* DefaultData.xml in Resources */,
 				D694DAA0204D0AA100575ABC /* Assets.xcassets in Resources */,
@@ -472,6 +487,7 @@
 				D69D9AF82069F34B00D1CE08 /* UnitPickerTF.m in Sources */,
 				D6A5193B204F8E7A00016821 /* CoreDataTVC.m in Sources */,
 				D6A470A8205BA86200F84180 /* Item+CoreDataProperties.m in Sources */,
+				D673AAD2207DEC2800CB2BF3 /* Item_photo+CoreDataClass.m in Sources */,
 				D655B99120624F860079D9A3 /* ItemVC.m in Sources */,
 				D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */,
 				D6A4709E205BA5D800F84180 /* LocationAtHome+CoreDataProperties.m in Sources */,
@@ -479,6 +495,7 @@
 				D694DA9B204D0AA100575ABC /* ViewController.m in Sources */,
 				D694DAA6204D0AA100575ABC /* main.m in Sources */,
 				D6A470A2205BA5D800F84180 /* LocationAtShop+CoreDataProperties.m in Sources */,
+				D673AACD207DEA4500CB2BF3 /* Model7toModel8.xcmappingmodel in Sources */,
 				D64BB67D2068A71000050B3E /* LocationsAtShopTVC.m in Sources */,
 				D64BB6832068A72300050B3E /* LocationAtShopVC.m in Sources */,
 				D6A3367820527C400038EF00 /* PrepareTVC.m in Sources */,
@@ -487,6 +504,7 @@
 				D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */,
 				D6AB856A204E705600C91231 /* MigrationVC.m in Sources */,
 				D694DACF204D0B3D00575ABC /* Model.xcdatamodeld in Sources */,
+				D673AAD3207DEC2800CB2BF3 /* Item_photo+CoreDataProperties.m in Sources */,
 				D69D9AFB206A254B00D1CE08 /* LocationAtHomePickerTF.m in Sources */,
 				D64BB675206895D400050B3E /* UnitsTVC.m in Sources */,
 				D64BB67820689C4A00050B3E /* UnitVC.m in Sources */,
@@ -794,6 +812,8 @@
 		D694DACD204D0B3D00575ABC /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D673AACB207DE7F800CB2BF3 /* Model 8.xcdatamodel */,
+				D673AACA207DE65E00CB2BF3 /* Model 7.xcdatamodel */,
 				D6A51938204F86E100016821 /* Model 6.xcdatamodel */,
 				D6AB856E204E815700C91231 /* Model 5.xcdatamodel */,
 				D6AB856B204E7F5100C91231 /* Model 4.xcdatamodel */,
@@ -801,7 +821,7 @@
 				D694DAD0204D334400575ABC /* Model 2.xcdatamodel */,
 				D694DACE204D0B3D00575ABC /* Model.xcdatamodel */,
 			);
-			currentVersion = D6A51938204F86E100016821 /* Model 6.xcdatamodel */;
+			currentVersion = D673AACB207DE7F800CB2BF3 /* Model 8.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
