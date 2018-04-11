@@ -167,7 +167,8 @@
     [self ensureItemHomeLocationIsNotNull];
     [self ensureItemShopLocationIsNotNull];
     CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
-    [cdh saveContext];
+//    [cdh saveContext];
+    [cdh backgroundSaveContext];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSError * error;
     Item * item = (Item *)[cdh.context existingObjectWithID:self.selectedItemID error:&error];

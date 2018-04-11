@@ -94,21 +94,31 @@ NSString * sourceStoreFileName = @"DefaultData.sqlite";
     }
     _model = [NSManagedObjectModel mergedModelFromBundles:nil];
     _coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
+    
+    _parentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    [_parentContext performBlockAndWait:^{
+        [_parentContext setPersistentStoreCoordinator:_coordinator];
+        [_parentContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    }];
+    
     _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_context setPersistentStoreCoordinator:_coordinator];
+//    [_context setPersistentStoreCoordinator:_coordinator];
+    [_context setParentContext:_parentContext];
     [_context setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     
     _importContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [_importContext performBlockAndWait:^{
-        [_importContext setPersistentStoreCoordinator:_coordinator];
+//        [_importContext setPersistentStoreCoordinator:_coordinator];
+        [_importContext setParentContext:_context];
         [_importContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
         [_importContext setUndoManager:nil];
     }];
     
-    _sourceCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
+//    _sourceCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
     _sourceContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     [_sourceContext performBlockAndWait:^{
-        [_sourceContext setPersistentStoreCoordinator:_sourceCoordinator];
+//        [_sourceContext setPersistentStoreCoordinator:_sourceCoordinator];
+        [_sourceContext setParentContext:_context];
         [_sourceContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
         [_sourceContext setUndoManager:nil];
     }];
@@ -579,6 +589,27 @@ NSString * sourceStoreFileName = @"DefaultData.sqlite";
     }else{
         NSLog(@"Skipped test data import");
     }
+}
+
+- (void)backgroundSaveContext{
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    [self saveContext];
+    
+    [_parentContext performBlock:^{
+        if ([_parentContext hasChanges]) {
+            NSError * error = nil;
+            if ([_parentContext save:&error]) {
+                NSLog(@"_parentContext SAVED changes to persistent store");
+            }else{
+                NSLog(@"_parentContext FAILED to save: %@", error);
+                [self showValidationError:error];
+            }
+        }else{
+            NSLog(@"_parentContext SKIPPED saving as there are no changes");
+        }
+    }];
 }
 
 @end

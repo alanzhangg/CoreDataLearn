@@ -82,6 +82,8 @@
         [self.frc.managedObjectContext deleteObject:deleteTarget];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -97,6 +99,8 @@
         item.collected = @NO;
     }
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
@@ -126,6 +130,7 @@
         [alert show];
     }
     shoppingList = nil;
+    [cdh backgroundSaveContext];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -152,6 +157,7 @@
     for (Item * item  in shoppingList) {
         item.listed = @NO;
     }
+    [cdh backgroundSaveContext];
 }
 
 #pragma mark - DATA

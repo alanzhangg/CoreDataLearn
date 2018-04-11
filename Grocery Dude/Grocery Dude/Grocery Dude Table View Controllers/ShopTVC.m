@@ -84,6 +84,8 @@
         item.collected = @YES;
     }
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
@@ -118,6 +120,8 @@
         UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nil message:@"Select items to be removed from the list" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
 }
 
 #pragma mark - DATA

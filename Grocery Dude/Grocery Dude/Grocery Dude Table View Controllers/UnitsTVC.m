@@ -84,6 +84,8 @@
         [self.frc.managedObjectContext deleteObject:deleteTarget];
         [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
 }
 
 #pragma mark -DATA

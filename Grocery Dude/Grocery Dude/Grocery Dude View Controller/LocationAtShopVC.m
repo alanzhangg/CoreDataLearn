@@ -25,6 +25,7 @@
         self.nameTextField.text = locationAtShop.aisle;
     }
 }
+
 - (void)viewDidLoad {
     if (debug==1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
@@ -33,12 +34,22 @@
     [self hideKeyboardWhenBackgroundIsTapped];
     self.nameTextField.delegate = self;
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     if (debug==1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
     [self refreshInterface];
     [self.nameTextField becomeFirstResponder];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    if (debug==1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper *cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SomethingChanged" object:nil userInfo:nil];
 }
 
 #pragma mark - TEXTFIELD

@@ -25,10 +25,13 @@
 @property (nonatomic, readonly) NSPersistentStoreCoordinator * sourceCoordinator;
 @property (nonatomic, readonly) NSPersistentStore * sourceStore;
 
+@property (nonatomic, readonly) NSManagedObjectContext * parentContext;
+
 @property (nonatomic, strong) NSTimer * importTimer;
 
 
 - (void)setupCoreData;
 - (void)saveContext;
+- (void)backgroundSaveContext;
 
 @end

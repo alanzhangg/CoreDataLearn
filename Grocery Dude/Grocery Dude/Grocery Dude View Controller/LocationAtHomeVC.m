@@ -41,6 +41,15 @@
     [self.nameTextField becomeFirstResponder];
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    if (debug==1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper *cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    [cdh backgroundSaveContext];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SomethingChanged" object:nil userInfo:nil];
+}
+
 #pragma mark - TEXTFIELD
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if (debug==1) {
