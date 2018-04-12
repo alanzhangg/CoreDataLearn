@@ -201,6 +201,9 @@
         self.shopLocationPickerTextField.text = item.locationAtShop.aisle;
         self.shopLocationPickerTextField.selectedObjectID = item.locationAtShop.objectID;
         self.photoImageView.image = [UIImage imageWithData:item.photo.data];
+        [cdh.context performBlock:^{
+            self.photoImageView.image = [UIImage imageWithData:item.photo.data];
+        }];
         [self checkCamera];
     }
 }

@@ -12,6 +12,7 @@
 #import "Unit+CoreDataClass.h"
 #import "AppDelegate.h"
 #import "ItemVC.h"
+#import "Thumbernailer.h"
 
 @interface PrepareTVC ()
 
@@ -31,6 +32,24 @@
     self.clearConfirmActionSheet.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(performFetch) name:@"SomethingChanged" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (debug == 1) {
+        NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
+    }
+    CoreDataHelper * cdh = [(AppDelegate *)[[UIApplication sharedApplication] delegate] chd];
+    NSArray * sortDescriptors = @[
+                                  [NSSortDescriptor sortDescriptorWithKey:@"locationAtHome.storedIn" ascending:YES],
+                                  [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]
+                                  ];
+    [Thumbernailer createMissingThumbnailsForEntityName:@"Item"
+                             withThumbnailAttributeName:@"thumbnail"
+                              withPhotoRelationshipName:@"photo"
+                                 withPhotoAttributeName:@"data"
+                                    withSortDescriptors:sortDescriptors
+                                      withImportContext:cdh.importContext];
 }
 
 - (void)didReceiveMemoryWarning {

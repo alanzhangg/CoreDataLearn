@@ -52,6 +52,8 @@
 		D6AB856D204E7FB000C91231 /* Model3toModel4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB856C204E7FB000C91231 /* Model3toModel4.xcmappingmodel */; };
 		D6AB8572204E81C400C91231 /* Model4toModel5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */; };
 		D6AB8574204E855700C91231 /* Model5toModel4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */; };
+		D6AFB9BE207EF85C006A68F2 /* Faulter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AFB9BD207EF85C006A68F2 /* Faulter.m */; };
+		D6AFB9C1207F0254006A68F2 /* Thumbernailer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AFB9C0207F0254006A68F2 /* Thumbernailer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +163,10 @@
 		D6AB856E204E815700C91231 /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
 		D6AB8571204E81C400C91231 /* Model4toModel5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model4toModel5.xcmappingmodel; sourceTree = "<group>"; };
 		D6AB8573204E855700C91231 /* Model5toModel4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model5toModel4.xcmappingmodel; sourceTree = "<group>"; };
+		D6AFB9BC207EF85C006A68F2 /* Faulter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Faulter.h; sourceTree = "<group>"; };
+		D6AFB9BD207EF85C006A68F2 /* Faulter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Faulter.m; sourceTree = "<group>"; };
+		D6AFB9BF207F0254006A68F2 /* Thumbernailer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Thumbernailer.h; sourceTree = "<group>"; };
+		D6AFB9C0207F0254006A68F2 /* Thumbernailer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Thumbernailer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +288,10 @@
 				D69D9AF32069E3D800D1CE08 /* CoreDataPickerTF.m */,
 				D6818F90206B77990079068A /* CoreDataImporter.h */,
 				D6818F91206B77990079068A /* CoreDataImporter.m */,
+				D6AFB9BC207EF85C006A68F2 /* Faulter.h */,
+				D6AFB9BD207EF85C006A68F2 /* Faulter.m */,
+				D6AFB9BF207F0254006A68F2 /* Thumbernailer.h */,
+				D6AFB9C0207F0254006A68F2 /* Thumbernailer.m */,
 			);
 			path = "Generic Core Data Classes";
 			sourceTree = "<group>";
@@ -487,6 +497,7 @@
 				D69D9AF82069F34B00D1CE08 /* UnitPickerTF.m in Sources */,
 				D6A5193B204F8E7A00016821 /* CoreDataTVC.m in Sources */,
 				D6A470A8205BA86200F84180 /* Item+CoreDataProperties.m in Sources */,
+				D6AFB9BE207EF85C006A68F2 /* Faulter.m in Sources */,
 				D673AAD2207DEC2800CB2BF3 /* Item_photo+CoreDataClass.m in Sources */,
 				D655B99120624F860079D9A3 /* ItemVC.m in Sources */,
 				D6A4709A205BA5D800F84180 /* Unit+CoreDataProperties.m in Sources */,
@@ -510,6 +521,7 @@
 				D64BB67820689C4A00050B3E /* UnitVC.m in Sources */,
 				D64BB67E2068A71000050B3E /* LocationsAtHomeTVC.m in Sources */,
 				D69D9AFE206A277800D1CE08 /* LocationAtShopPickerTF.m in Sources */,
+				D6AFB9C1207F0254006A68F2 /* Thumbernailer.m in Sources */,
 				D69D9AF42069E3D800D1CE08 /* CoreDataPickerTF.m in Sources */,
 				D655B98E206239EA0079D9A3 /* ShopTVC.m in Sources */,
 				D6A470A7205BA86200F84180 /* Item+CoreDataClass.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "CoreDataHelper.h"
 #import "CoreDataImporter.h"
+#import "Faulter.h"
 
 @implementation CoreDataHelper
 
@@ -180,9 +181,9 @@ NSString * sourceStoreFileName = @"DefaultData.sqlite";
     if (debug == 1) {
         NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
     }
-//    [self setDefaultDataStoreAsInitialStore];
+    [self setDefaultDataStoreAsInitialStore];
     [self loadStore];
-    [self importGroceryDudeTestData];
+//    [self importGroceryDudeTestData];
 //    [self checkIfDefaultDataNeedsImporting];
 
 }
@@ -577,8 +578,12 @@ NSString * sourceStoreFileName = @"DefaultData.sqlite";
 //                    [item setValue:UIImagePNGRepresentation([UIImage imageNamed:@"GroceryHead.png"]) forKey:@"photoData"];
                     NSLog(@"Inserting %@", [item valueForKey:@"name"]);
                     [CoreDataImporter saveContext:_importContext];
-                    [_importContext refreshObject:item mergeChanges:NO];
-                    [_importContext refreshObject:photo mergeChanges:NO];
+                    [Faulter faultObjectWithID:item.objectID
+                                     inContext:_importContext];
+                    [Faulter faultObjectWithID:photo.objectID
+                                     inContext:_importContext];
+//                    [_importContext refreshObject:item mergeChanges:NO];
+//                    [_importContext refreshObject:photo mergeChanges:NO];
                 }
             }
             [self somethingChanged];
